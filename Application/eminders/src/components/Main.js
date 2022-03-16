@@ -14,37 +14,67 @@ class Main extends Component {
     this.getList();
   }
 
+  compoenentDidUpdate() {
+    this.getList(); 
+  }
+
+  setData = (json) => {
+    console.log("setData called with...");
+    console.log(json);
+    this.setState({list: json.message});
+  }
+
   // Retrieves the list of items from the Express app
   getList = () => {
     fetch('/api/stub/main')
-    .then(res => res.json())
-    .then(list => this.setState({ list }))
+    .then(res => {
+        if (res.status !== 200) {
+            console.error("Response status: " + res.status.toString()); 
+        }
+        else {
+            return res.json();
+        }
+    }
+    )
+    .then(jsonData => {
+            this.setData(jsonData); 
+        }
+    );
   }
 
   render() {
-    const { list } = this.state;
+    console.log("Render called");
+    const list = this.state.list;
+    console.log(this.state.list);
+
+    var mapItems = (show) => {
+        if (show) {
+            return (
+                <div>
+                {
+                    list.map((item, index) => {
+                        console.log("index is:" + index.toString()); 
+                        console.log("Item is: ");
+                        console.log(item); 
+                        return (
+                            <div>{item}</div>
+                        );
+                    })
+                }
+                </div>
+            );
+        }
+        else {
+            return (
+                <div>NO ITEMS AVAILABLE FROM SERVER</div>
+            );
+        }
+    }
 
     return (
       <div className="App">
-        <h1>List of Items (Stub MAIN)</h1>
-        {/* Check to see if any items are found*/}
-        {list.length ? (
-          <div>
-            {/* Render the list of items */}
-            {list.map((item) => {
-              return(
-                <div>
-                  {item}
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div>
-            <h2>No List Items Found</h2>
-          </div>
-        )
-      }
+        <h1>List of Items from server: (Stub MAIN)</h1>
+        { mapItems(this.state.list.length >= 1) }      
       </div>
     );
   }
