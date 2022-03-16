@@ -28,6 +28,17 @@ app.get("/api/stub/main", (req, res) => {
   console.log('Sent day list for get request at /api/stub/main')
 });
 
+// Test loading a page with...
+// const birds = require('.birds')
+// app.use('/birds', birds)
+
+// Currently we have the following equivalencies: (assuming both "server" and "eminders" are being served)
+// localhost:5050 == localhost:3000 == localhost:5050/login == localhost:3000/login
+// localhost:3000/Main == localhost:5050/Main
+// localhost:5050/api/stub/login == data for localhost:3000 etc.
+// localhost:5050/api/stub/main == data for localhost:3000/Main etc.
+
+
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../eminders/build', 'index.html'));
