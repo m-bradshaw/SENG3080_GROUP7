@@ -8,9 +8,9 @@ class Login extends Component {
     <div className="App">
       <h1>Project Login STUB</h1>
       {/* Link to Main.js */}
-      <NavLink to={'../Main'}>
+      <NavLink to={'../main'}>
         <button variant="raised">
-            My List
+            GO TO MAIN PAGE
         </button>
       </NavLink>
     </div>
