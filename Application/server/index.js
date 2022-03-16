@@ -20,6 +20,13 @@ app.use('/api/v1', api);
 app.use(middleware.notFound);
 app.use(middleware.errorHandler);
 
+require('./cronJobs');
+
+// Have Node serve the files for our built React app
+//Not totally sure about this
+app.use(express.static(path.resolve(__dirname, '../eminders/build')));
+
+
 //Set up default mongoose connection
 mongoose.connect(process.env.DB_SOURCE, {useNewUrlParser: true});
 const db = mongoose.connection;
