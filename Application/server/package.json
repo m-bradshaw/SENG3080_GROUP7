@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server packages",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node index.js",
+    "build": "cd ../eminders && npm install && npm run build"
+  },
+  "author": "Group7",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "engines": {
+    "node": ">= 0.6"
+  }
+}
