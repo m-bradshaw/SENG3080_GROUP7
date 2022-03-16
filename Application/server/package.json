@@ -6,7 +6,10 @@
   "scripts": {
     "test": "test",
     "start": "node index.js",
-    "build": "cd ../eminders && npm install && npm run build"
+    "build": "cd ../eminders && npm run build",
+    "ib":"cd ../eminders && npm install && npm run build",
+    "ibs":"cd ../eminders && npm install && npm run build && node ../server/index.js",
+    "bs":"cd ../eminders && npm run build && node ../server/index.js"
   },
   "author": "Group7",
   "license": "ISC",
