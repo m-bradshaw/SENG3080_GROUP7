@@ -7,7 +7,7 @@ class Main extends Component {
   constructor(props){      
     super(props);    
     this.state = {
-      list: []
+        dataList: []
     }
     this.dataSource = "api/stub/main";
   }
@@ -25,16 +25,14 @@ class Main extends Component {
     if (json) {
         console.log("setData called with...");
         console.log(json);
-        this.setState({list: json.message});
+        this.setState({dataList: json.message});
     }
   }
 
   render() {
-    console.log("Render called");
-    const list = this.state.list;
-    console.log(this.state.list);
+    const list = this.state.dataList;
 
-    var mapItems = (show) => {
+    var mapData = (show) => {
         if (show) {
             return (
                 <div>
@@ -58,7 +56,7 @@ class Main extends Component {
     return (
       <div className="App">
         <h1>List of Items from server: (Stub MAIN)</h1>
-        { mapItems(this.state.list.length >= 1) }      
+        { mapData(this.state.dataList.length >= 1) }      
       </div>
     );
   }
