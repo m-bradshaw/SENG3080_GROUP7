@@ -4,8 +4,6 @@
 const path = require('path');
 const express = require("express");
 
-const PORT = process.env.PORT || 3001;
-
 const app = express();
 
 // Have Node serve the files for our built React app
@@ -34,6 +32,8 @@ app.get("/api/stub/main", (req, res) => {
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../eminders/build', 'index.html'));
 });
+
+const PORT = process.env.PORT || 5050;
   
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
