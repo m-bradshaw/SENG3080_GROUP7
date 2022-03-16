@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 class Main extends Component {
+
   // Initialize the state
   constructor(props){
     super(props);
@@ -53,11 +54,8 @@ class Main extends Component {
                 <div>
                 {
                     list.map((item, index) => {
-                        console.log("index is:" + index.toString()); 
-                        console.log("Item is: ");
-                        console.log(item); 
                         return (
-                            <div>{item}</div>
+                            <div key={index}>{item}</div>
                         );
                     })
                 }
