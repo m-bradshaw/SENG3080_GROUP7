@@ -1,46 +1,32 @@
 import React, { Component } from 'react';
+import GetData from './HandleData';
 
 class Main extends Component {
 
   // Initialize the state
-  constructor(props){
-    super(props);
+  constructor(props){      
+    super(props);    
     this.state = {
       list: []
     }
+    this.dataSource = "api/stub/main";
   }
 
   // Fetch the list on first mount
   componentDidMount() {
-    this.getList(this.setData);
+    GetData(this.dataSource, this.setData);
   }
 
   compoenentDidUpdate() {
-    this.getList(this.setData); 
+    GetData(this.dataSource, this.setData); 
   }
 
   setData = (json) => {
-    console.log("setData called with...");
-    console.log(json);
-    this.setState({list: json.message});
-  }
-
-  // Retrieves the list of items from the Express app
-  getList = (dataHandlerMethod) => {
-    fetch('/api/stub/main')
-    .then(res => {
-        if (res.status !== 200) {
-            console.error("Response status: " + res.status.toString()); 
-        }
-        else {
-            return res.json();
-        }
+    if (json) {
+        console.log("setData called with...");
+        console.log(json);
+        this.setState({list: json.message});
     }
-    )
-    .then(jsonData => {
-            dataHandlerMethod(jsonData); 
-        }
-    );
   }
 
   render() {
