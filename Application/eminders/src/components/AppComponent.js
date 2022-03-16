@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import Loginscreen from 'components/Loginscreen';
-import Mainpage from 'components/Mainpage';
+//import Loginscreen from './Loginscreen';
+import Login from './Login';
+//import MainPage from './MainPage';
+import Main from './Main';
 import AOS from 'aos';
 import { isMobile } from 'react-device-detect';
 
 import 'aos/dist/aos.css';
-import './App.css';
-import './fonts.css';
+import '../css/App.css';
+import '../css/fonts.css';
 
-class App extends Component {
+class AppComponent extends Component {
   componentDidMount() {
     setTimeout(() => {
       AOS.init({
@@ -20,19 +22,25 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <Router hashType="noslash" basename={process.env.BASE_PATH}>
+
+    const MyApp = () => (
+      <div>
         <Switch>
-          <Route exact path="/" component={Loginscreen}>
-              <div>
-                  <Link to="/Home">Homepage</Link>
-              </div>
-          </Route>
-          <Route exact path="/Home" component={Mainpage}></Route>
+          {/* <Route exact path='/' component={Login}></Route> */}
+          <Route path='/Login' component={Login}></Route>
+          <Route path='/Main' component={Main}></Route>
         </Switch>
-      </Router>
+      </div>
+    )
+
+    return (
+      // <Router hashType="noslash" basename={process.env.BASE_PATH}>
+        <Switch>
+          <MyApp></MyApp>
+        </Switch>
+      // </Router>
     );
   }
 }
 
-export default App;
+export default AppComponent;

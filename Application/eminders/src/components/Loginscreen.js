@@ -2,7 +2,7 @@
 import React from 'react';
 import cn from 'classnames';
 
-import styles from './Loginscreen.module.scss';
+import styles from '../css/Loginscreen.module.scss';
 
 export default function Loginscreen(props) {
   return (

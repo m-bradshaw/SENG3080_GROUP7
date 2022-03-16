@@ -2,7 +2,7 @@
 import React from 'react';
 import cn from 'classnames';
 
-import styles from './MainPage.module.scss';
+import styles from '../css/MainPage.module.scss';
 
 export default function MainPage(props) {
   return (
