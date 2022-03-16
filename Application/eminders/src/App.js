@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import React from "react";
-import './App.css';
+import './css/App.css';
 
 function App() {
   const [serverData, setServerData] = React.useState(null); 
