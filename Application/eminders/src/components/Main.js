@@ -18,7 +18,7 @@ class Main extends Component {
   getList = () => {
     fetch('/api/stub/main')
     .then(res => res.json())
-    .then(list => this.setState({ message }))
+    .then(list => this.setState({ list }))
   }
 
   render() {

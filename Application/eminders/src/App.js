@@ -3,7 +3,7 @@ import React from "react";
 import './css/App.css';
 
 function App() {
-  const [serverData, setServerData] = React.useState(null); 
+  // const [serverData, setServerData] = React.useState(null); 
 
   // React.useEffect(() => {
   //   // https://www.freecodecamp.org/news/how-to-create-a-react-app-with-a-node-backend-the-complete-guide/

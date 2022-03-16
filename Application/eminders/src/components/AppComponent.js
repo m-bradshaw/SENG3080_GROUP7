@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 //import Loginscreen from './Loginscreen';
 import Login from './Login';
 //import MainPage from './MainPage';
@@ -22,22 +22,15 @@ class AppComponent extends Component {
   }
 
   render() {
-
-    const MyApp = () => (
-      <div>
-        <Switch>
-          {/* <Route exact path='/' component={Login}></Route> */}
-          <Route path='/Login' component={Login}></Route>
-          <Route path='/Main' component={Main}></Route>
-        </Switch>
-      </div>
-    )
-
     return (
       // <Router hashType="noslash" basename={process.env.BASE_PATH}>
-        <Switch>
-          <MyApp></MyApp>
-        </Switch>
+        <div>
+        <Routes>
+          <Route path='/' element={<Login/>}></Route>
+          <Route path='/Login' element={<Login/>}></Route>
+          <Route path='/Main' element={<Main/>}></Route>
+        </Routes>
+      </div>
       // </Router>
     );
   }
