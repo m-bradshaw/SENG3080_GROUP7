@@ -12,11 +12,11 @@ class Main extends Component {
 
   // Fetch the list on first mount
   componentDidMount() {
-    this.getList();
+    this.getList(this.setData);
   }
 
   compoenentDidUpdate() {
-    this.getList(); 
+    this.getList(this.setData); 
   }
 
   setData = (json) => {
@@ -26,7 +26,7 @@ class Main extends Component {
   }
 
   // Retrieves the list of items from the Express app
-  getList = () => {
+  getList = (dataHandlerMethod) => {
     fetch('/api/stub/main')
     .then(res => {
         if (res.status !== 200) {
@@ -38,7 +38,7 @@ class Main extends Component {
     }
     )
     .then(jsonData => {
-            this.setData(jsonData); 
+            dataHandlerMethod(jsonData); 
         }
     );
   }
