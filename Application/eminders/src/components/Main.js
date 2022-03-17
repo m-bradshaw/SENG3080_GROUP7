@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GetData from './HandleData';
 import { NavLink} from 'react-router-dom';
 
-import {Button, Form} from 'react-bootstrap';
+import {Button, Container, Form, Row, Col} from 'react-bootstrap';
 
 class Main extends Component {
 
@@ -60,58 +60,107 @@ class Main extends Component {
     return (
       <div>
         <div style={divStyle}>
-          <h1>List of Items from server: (Stub MAIN)</h1>
+          <h1>Main page stub</h1>
           { mapData(this.state.dataList.length >= 1) }      
         </div>
-        <div>
-          <NavLink to={'../login'}>
-            <Button>
-              Log Out
-            </Button>
-          </NavLink>  
-          <br>        
-          </br>
-          <h1>
-            Welcome!
-          </h1>     
-          <h4>
-            Create/Edit Reminder:
-          </h4>        
-          <Form>
-            <Form.Group className="mb-3" controlId='formTextMessage'>
-              <Form.Label>Message:</Form.Label>
-              <Form.Control as="textarea" rows={5} placeholder='Enter message here...'></Form.Control>      
-            </Form.Group>        
-            <Form.Group className="mb-3" controlId='formDate'>
-              <Form.Label>Date:</Form.Label>
-              <Form.Control type="date" placeholder='Enter message here...'></Form.Control>      
-            </Form.Group>        
-            <Form.Group className="mb-3" controlId='formTime'>
-              <Form.Label>Time:</Form.Label>
-              <Form.Control type="time" placeholder='Enter message here...'></Form.Control>      
-            </Form.Group>    
-            <Form.Group className="mb-3" controlId="formRecurringCheckbox">
-              <Form.Check type="checkbox" label="Recurring" />
-            </Form.Group>  
-            <Form.Group className="mb-3" controlId="formTimeRadios">
-              <Form.Check type="radio" name="timeGroup" label="Daily" />
-              <Form.Check type="radio" name="timeGroup" label="Weekly" />
-              <Form.Check type="radio" name="timeGroup" label="Monthly" />
-              <Form.Check type="radio" name="timeGroup" label="Yearly" />
-            </Form.Group>  
-            <Form.Group className="mb-3" controlId="formDayCheckbox">
-              <Form.Check type="checkbox" name="dayGroup" label="Sunday" />
-              <Form.Check type="checkbox" name="dayGroup" label="Monday" />
-              <Form.Check type="checkbox" name="dayGroup" label="Tuesday" />
-              <Form.Check type="checkbox" name="dayGroup" label="Wednesday" />
-              <Form.Check type="checkbox" name="dayGroup" label="Thursday" />
-              <Form.Check type="checkbox" name="dayGroup" label="Friday" />
-              <Form.Check type="checkbox" name="dayGroup" label="Saturday" />
-            </Form.Group> 
-            <Button variant='primary' type='submit'>Submit</Button>
-            <Button variant='teritary' type='cancel'>Cancel</Button>
-          </Form> 
-        </div>
+
+        <br></br><br></br>
+
+        <Container>
+
+          <Row className='alignCenter'>
+            <Col>
+              <NavLink to={'../login'}>
+                <Button>
+                  Log Out
+                </Button>
+              </NavLink>  
+            </Col>
+            <Col xs={8}>
+              <h1>
+                Welcome!
+              </h1>
+            </Col>
+            <Col></Col>
+          </Row>
+
+          <Row>
+
+            <Form>
+              <Row>
+                <Col></Col>
+                  <Col xs={8}>
+                    <h4>
+                      Create/Edit Reminder:
+                    </h4> 
+                    <Form.Group className="mb-3" controlId='formTextMessage'>
+                      <Form.Label>Message:</Form.Label>
+                      <Form.Control as="textarea" rows={5} placeholder='Enter message here...'></Form.Control>      
+                    </Form.Group>        
+                    <Form.Group className="mb-3" controlId='formDate'>
+                      <Form.Label>Date:</Form.Label>
+                      <Form.Control type="date" placeholder='Enter message here...'></Form.Control>      
+                    </Form.Group>        
+                    <Form.Group className="mb-3" controlId='formTime'>
+                      <Form.Label>Time:</Form.Label>
+                      <Form.Control type="time" placeholder='Enter message here...'></Form.Control>      
+                    </Form.Group> 
+                  </Col>
+                <Col></Col>
+              </Row>
+
+              <Row>
+                <Col></Col>
+                <Col xs={8}>
+                  <Form.Group className="mb-3" controlId="formRecurringCheckbox">
+                    <Form.Check type="checkbox" label="Recurring" />
+                  </Form.Group>  
+                  <Form.Group className="mb-3" controlId="formTimeRadios">
+                    <Form.Check inline type="radio" name="timeGroup" label="Daily" />
+                    <Form.Check inline type="radio" name="timeGroup" label="Weekly" />
+                    <Form.Check inline type="radio" name="timeGroup" label="Monthly" />
+                    <Form.Check inline type="radio" name="timeGroup" label="Yearly" />
+                  </Form.Group> 
+                </Col>
+                <Col></Col>                 
+              </Row>
+              
+              <Row>
+                <Col></Col>     
+                <Col xs={8}>
+                  <Form.Group className="mb-3" controlId="formDayCheckbox">
+                    <Form.Check inline type="checkbox" name="dayGroup" label="Sunday" />
+                    <Form.Check inline type="checkbox" name="dayGroup" label="Monday" />
+                    <Form.Check inline type="checkbox" name="dayGroup" label="Tuesday" />
+                    <Form.Check inline type="checkbox" name="dayGroup" label="Wednesday" />
+                    <Form.Check inline type="checkbox" name="dayGroup" label="Thursday" />
+                    <Form.Check inline type="checkbox" name="dayGroup" label="Friday" />
+                    <Form.Check inline type="checkbox" name="dayGroup" label="Saturday" />
+                  </Form.Group>
+                </Col>     
+                <Col></Col>     
+              </Row>
+              
+              <Row className='alignCenter'>
+                <Col></Col>
+                <Col>
+                  <Button variant='primary' type='submit'>Submit</Button>                  
+                </Col>
+                <Col>
+                  <Button variant='teritary' type='cancel'>Cancel</Button>
+                </Col>                
+                <Col></Col>                
+              </Row>
+
+            </Form> 
+
+          </Row>
+
+          <Row>
+            {/* THIS IS WHERE THE LIST OF REMINDERS SHOULD GO */}
+          </Row>
+          
+        </Container>
     </div>
     );
   }
