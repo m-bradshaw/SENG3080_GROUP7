@@ -23,8 +23,10 @@ app.get("/api/stub/login", (req, res) => {
 
 // Handle GET requests to /api/stub/main route
 app.get("/api/stub/main", (req, res) => {
-  var list = ["monday", "tuesday", "wednesday"];
-  res.json({ message: list });
+  var dList = ["monday", "tuesday", "wednesday"];
+  var tList = ["10:00", "2:00", "1:15"];
+  var msgList = ["Do a thing", "Do another thing", "Sleep I guess?"];
+  res.json([{date: dList[0], time: tList[0], message: msgList[0]}, {date: dList[1], time: tList[1], message: msgList[1]}, {date: dList[2], time: tList[2], message: msgList[2]}]);
   console.log('Sent day list for get request at /api/stub/main')
 });
 

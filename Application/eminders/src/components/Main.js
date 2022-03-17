@@ -5,6 +5,7 @@ import '../css/layout.css';
 import MessageForm from './MessageForm';
 
 import {Button, Container, Row, Col} from 'react-bootstrap';
+import ExistingMessage from './ExistingMessage';
 
 class Main extends Component {
 
@@ -12,7 +13,7 @@ class Main extends Component {
   constructor(props){      
     super(props);    
     this.state = {
-        dataList: []
+        dataList: [[]]
     }
     this.dataSource = "api/stub/main";
   }
@@ -30,23 +31,23 @@ class Main extends Component {
     if (json) {
         console.log("setData called with...");
         console.log(json);
-        this.setState({dataList: json.message});
+        this.setState({dataList: json});
     }
   }
 
   render() {
-    const list = this.state.dataList;
+    const jsonObject = this.state.dataList;
 
     var mapData = (show) => {
         if (show) {
             return (
                 <div>
                 {
-                    list.map((item, index) => {
-                        return (
-                            <div key={index}>{item}</div>
-                        );
-                    })
+                  jsonObject.map((value, index) => {
+                      return (
+                        <ExistingMessage date={value.date} message={value.message} time={value.time} key={index}>{index}</ExistingMessage>                                                    
+                      );
+                  })
                 }
                 </div>
             );
@@ -58,16 +59,8 @@ class Main extends Component {
         }
     }
 
-    const divStyle={backgroundColor: 'green'};
     return (
       <div>
-        <div style={divStyle}>
-          <h1>Main page stub</h1>
-          { mapData(this.state.dataList.length >= 1) }      
-        </div>
-
-        <br></br><br></br>
-
         <Container>
 
           <Row className='alignCenter'>
@@ -91,6 +84,7 @@ class Main extends Component {
           </Row>
 
           <Row>
+            { mapData(this.state.dataList.length >= 1) }    
             {/* THIS IS WHERE THE LIST OF REMINDERS SHOULD GO */}
           </Row>
           

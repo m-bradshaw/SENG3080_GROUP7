@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import GetData from './HandleData';
 import '../css/layout.css';
 
@@ -10,7 +10,8 @@ class Login extends Component {
     constructor(props){      
         super(props);    
         this.state = {
-            dataList: []
+            dataList: [], 
+            formValidated: false,
         }
         this.dataSource = "api/stub/login";
     }
@@ -30,7 +31,17 @@ class Login extends Component {
             console.log(json);
             this.setState({dataList: json.message});
         }
-      }
+    }
+
+    handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        this.setState({formValidated: true});
+    };
 
     render() {
         const list = this.state.dataList;
@@ -65,7 +76,7 @@ class Login extends Component {
                 </div>
 
                 <br></br><br></br>
-
+                {(this.state.formValidated) ? <Navigate to={'../main'}></Navigate> : null}
                 <Container>
                     <Row className='alignCenter'>
                         <Col></Col>
@@ -76,18 +87,16 @@ class Login extends Component {
                     </Row>
                     <Row className='alignCenter'>
                         <Col xs={8}>
-                            <Form>
-                                <Form.Group className="mb-3" controlId='formBasicText'>
+                            <Form noValidate validated={this.state.formValidated} onSubmit={this.handleSubmit}>
+                                <Form.Group className="mb-3" controlId='formUsername'>
                                     <Form.Label>Username:</Form.Label>
-                                    <Form.Control type="username" placeholder='Username'></Form.Control>      
+                                    <Form.Control type="username" placeholder='Username' required></Form.Control>      
                                 </Form.Group>       
-                                <Form.Group className="mb-3" controlId='formBasicText'>
-                                    <Form.Label htmlFor="inputPassword5">Password:</Form.Label>
-                                    <Form.Control type="password" id="inputPassword5" aria-describedby='passwordHelpBlock'></Form.Control>      
+                                <Form.Group className="mb-3" controlId='formPassword'>
+                                    <Form.Label>Password:</Form.Label>
+                                    <Form.Control type="password" aria-describedby='passwordHelpBlock' required></Form.Control>      
                                 </Form.Group>  
-                                <NavLink to={'../main'}>
-                                    <Button variant='primary' type='submit'>Login</Button>
-                                </NavLink>
+                                <Button variant='primary' type='submit'>Login</Button>
                             </Form>
                         </Col>
                     </Row>
