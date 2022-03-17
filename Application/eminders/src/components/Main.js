@@ -54,9 +54,10 @@ class Main extends Component {
         }
     }
 
+    const divStyle={backgroundColor: 'green'};
     return (
       <div>
-        <div className="App">
+        <div style={divStyle}>
           <h1>List of Items from server: (Stub MAIN)</h1>
           { mapData(this.state.dataList.length >= 1) }      
         </div>
