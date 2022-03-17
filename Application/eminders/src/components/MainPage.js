@@ -1,6 +1,7 @@
 /* This source code is exported from pxCode, you can get more document from https://www.pxcode.io */
 import React from 'react';
 import cn from 'classnames';
+import Button from 'react-bootstrap/Button';
 
 import styles from '../css/MainPage.module.scss';
 
@@ -51,11 +52,6 @@ export default function MainPage(props) {
           </div>
 
           <div
-            style={{
-              '--src': `url(${
-                require('assets/8e92315dcdf35782755a9624f37027d5.png').default
-              })`
-            }}
             className={cn(styles.cover_block6, styles.cover_block6_layout)}>
             <div
               className={cn(
@@ -89,15 +85,7 @@ export default function MainPage(props) {
             </div>
             <div className={cn(styles.flex2_spacer)} />
             <div className={cn(styles.flex2_item1)}>
-              <div
-                style={{
-                  '--src': `url(${
-                    require('assets/bbf8b7096993ea0ed3eb3c59d7fd5fd5.png')
-                      .default
-                  })`
-                }}
-                className={cn(styles.image11, styles.image11_layout)}
-              />
+              <Button className={cn(styles.image11, styles.image11_layout)}>DATE PICKER</Button>
             </div>
           </div>
 
@@ -124,15 +112,7 @@ export default function MainPage(props) {
             </div>
             <div className={cn(styles.flex2_spacer)} />
             <div className={cn(styles.flex2_item2)}>
-              <div
-                style={{
-                  '--src': `url(${
-                    require('assets/034349b55d47acbe9636136de98757a7.png')
-                      .default
-                  })`
-                }}
-                className={cn(styles.image11, styles.image11_layout)}
-              />
+              <Button className={cn(styles.image11, styles.image11_layout)}>TIME PICKER</Button>
             </div>
           </div>
 
@@ -216,12 +196,6 @@ export default function MainPage(props) {
               <div
                 className={cn(styles.cover_block4, styles.cover_block4_layout)}>
                 <div
-                  style={{
-                    '--src': `url(${
-                      require('assets/3a50b94c7435f3f92b32933441436135.png')
-                        .default
-                    })`
-                  }}
                   className={cn(styles.image10, styles.image10_layout)}
                 />
               </div>
@@ -287,12 +261,6 @@ export default function MainPage(props) {
               <div
                 className={cn(styles.cover_block4, styles.cover_block4_layout)}>
                 <div
-                  style={{
-                    '--src': `url(${
-                      require('assets/1580b3b3d7fed262c63e1c2f0d4880d3.png')
-                        .default
-                    })`
-                  }}
                   className={cn(styles.image10, styles.image10_layout1)}
                 />
               </div>

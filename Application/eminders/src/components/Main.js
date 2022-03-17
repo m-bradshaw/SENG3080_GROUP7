@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GetData from './HandleData';
+import MainPage from './MainPage';
 
 class Main extends Component {
 
@@ -54,9 +55,14 @@ class Main extends Component {
     }
 
     return (
-      <div className="App">
-        <h1>List of Items from server: (Stub MAIN)</h1>
-        { mapData(this.state.dataList.length >= 1) }      
+      <div>
+        <div className="App">
+          <h1>List of Items from server: (Stub MAIN)</h1>
+          { mapData(this.state.dataList.length >= 1) }      
+        </div>
+        <div>
+          <MainPage></MainPage>
+        </div>
       </div>
     );
   }

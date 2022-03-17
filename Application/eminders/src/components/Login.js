@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink} from 'react-router-dom';
 import GetData from './HandleData';
+import Loginscreen from './Loginscreen';
 
 class Login extends Component {
     // Initialize the state
@@ -54,17 +55,25 @@ class Login extends Component {
         }
 
         return (
-            <div className="App">
-            <h1>Project Login STUB</h1>
-            {/* Link to Main.js */}
+            <div>
+                <div className="App">
 
-            <NavLink to={'../main'}>
-                <button variant="raised">
-                    GO TO MAIN PAGE
-                </button>
-            </NavLink>
-            
-            { mapData(this.state.dataList.length >= 1) }    
+                    <h1>Project Login STUB</h1>
+                    {/* Link to Main.js */}
+
+                    <NavLink to={'../main'}>
+                        <button variant="raised">
+                            GO TO MAIN PAGE
+                        </button>
+                    </NavLink>
+                    
+                    { mapData(this.state.dataList.length >= 1) }    
+
+                </div>
+
+                <div>
+                    <Loginscreen></Loginscreen>
+                </div>
             </div>
         );
     }
