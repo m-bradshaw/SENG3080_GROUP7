@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import GetData from './HandleData';
 
-import cn from 'classnames';
 import {Button, Form} from 'react-bootstrap';
-import styles from '../css/Loginscreen.module.scss';
 
 class Login extends Component {
     // Initialize the state
