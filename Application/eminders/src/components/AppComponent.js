@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
-//import Loginscreen from './Loginscreen';
 import Login from './Login';
 //import MainPage from './MainPage';
 import Main from './Main';

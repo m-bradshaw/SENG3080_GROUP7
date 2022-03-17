@@ -9,7 +9,6 @@ import { BrowserRouter } from 'react-router-dom';
 render((
   <BrowserRouter>
     <React.StrictMode>
-      {/* <App />  */}
       <AppComponent />
     </React.StrictMode>
   </BrowserRouter>  

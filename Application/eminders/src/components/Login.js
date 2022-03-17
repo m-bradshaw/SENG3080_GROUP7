@@ -3,7 +3,7 @@ import { NavLink} from 'react-router-dom';
 import GetData from './HandleData';
 
 import cn from 'classnames';
-import Button from 'react-bootstrap/Button';
+import {Button, Form} from 'react-bootstrap';
 import styles from '../css/Loginscreen.module.scss';
 
 class Login extends Component {
@@ -66,33 +66,22 @@ class Login extends Component {
                 </div>
 
                 <div>
-                    <div className={`loginscreen ${cn(styles.block, styles.block_layout)}`}>
-                    <div className={cn(styles.flex, styles.flex_layout)}>
-                        <h1 className={cn(styles.hero_title, styles.hero_title_layout)}>
-                        {'e-minders'}
-                        </h1>
-                        <h4 className={cn(styles.highlights, styles.highlights_layout)}>
-                        {'Username'}
-                        </h4>
-                        <div className={cn(styles.box, styles.box_layout)} />
-                        <h4 className={cn(styles.highlights, styles.highlights_layout1)}>
-                        {'Password'}
-                        </h4>
-                        <div className={cn(styles.box, styles.box_layout1)} />
-
-                        <div className={cn(styles.flex1, styles.flex1_layout)}>
-                        <Button className={cn(styles.text_body, styles.text_body_layout)}>
-                            {'Create Account'}
-                        </Button>
-                        <div className={cn(styles.flex1_spacer)} />
-                        <Button className={cn(styles.text_body, styles.text_body_layout)}>Forgot Password</Button>
-                        </div>
-
+                    <h1>e-minders</h1>
+                    <Form>
+                        <Form.Group className="mb-3" controlId='formBasicText'>
+                            <Form.Label>Username:</Form.Label>
+                            <Form.Control type="username" placeholder='Enter message here...'></Form.Control>      
+                        </Form.Group>       
+                        <Form.Group className="mb-3" controlId='formBasicText'>
+                            <Form.Label htmlFor="inputPassword5">Password:</Form.Label>
+                            <Form.Control type="password" id="inputPassword5" aria-describedby='passwordHelpBlock'></Form.Control>      
+                        </Form.Group>  
                         <NavLink to={'../main'}>
-                        <Button className={cn(styles.image, styles.image_layout)}>Login</Button>
+                            <Button variant='primary' type='submit'>Login</Button>
                         </NavLink>
-                    </div>
-                    </div>
+                    </Form>
+                    <Button>Create Account</Button>
+                    <Button >Forgot Password</Button>
                 </div>
             </div>
         );
