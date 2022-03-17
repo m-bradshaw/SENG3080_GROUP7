@@ -4,8 +4,6 @@
 const path = require('path');
 const express = require("express");
 
-const PORT = process.env.PORT || 3001;
-
 const app = express();
 
 // Have Node serve the files for our built React app
@@ -13,13 +11,42 @@ app.use(express.static(path.resolve(__dirname, '../eminders/build')));
 
 // Handle GET requests to /api route
 app.get("/api", (req, res) => {
-    res.json({ message: "Hello from server (Megan)!" });
-  });
+  res.json({ message: "Hello from the server!" });
+});
+
+// Handle GET requests to /api/stub/login route
+app.get("/api/stub/login", (req, res) => {
+  var list = ["megan", "gabe", "duane"];
+  res.json({ message: list });
+  console.log('Sent name list for get request at /api/stub/login')
+});
+
+// Handle GET requests to /api/stub/main route
+app.get("/api/stub/main", (req, res) => {
+  var dList = ["monday", "tuesday", "wednesday"];
+  var tList = ["10:00", "2:00", "1:15"];
+  var msgList = ["Do a thing", "Do another thing", "Sleep I guess?"];
+  res.json([{date: dList[0], time: tList[0], message: msgList[0]}, {date: dList[1], time: tList[1], message: msgList[1]}, {date: dList[2], time: tList[2], message: msgList[2]}]);
+  console.log('Sent day list for get request at /api/stub/main')
+});
+
+// Test loading a page with...
+// const birds = require('.birds')
+// app.use('/birds', birds)
+
+// Currently we have the following equivalencies: (assuming both "server" and "eminders" are being served)
+// localhost:5050 == localhost:3000 == localhost:5050/login == localhost:3000/login
+// localhost:3000/Main == localhost:5050/Main
+// localhost:5050/api/stub/login == data for localhost:3000 etc.
+// localhost:5050/api/stub/main == data for localhost:3000/Main etc.
+
 
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../eminders/build', 'index.html'));
 });
+
+const PORT = process.env.PORT || 5050;
   
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
