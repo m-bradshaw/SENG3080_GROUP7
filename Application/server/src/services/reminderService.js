@@ -1,3 +1,5 @@
+const Reminder = require("../models/reminder")
+
 async function get(id){
     console.log("get")
 }

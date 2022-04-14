@@ -1,26 +1,19 @@
-const path = require('path');
+require("dotenv").config()
 const express = require("express");
+const mongoose = require('mongoose');
 const reminderRouter = require('./src/routes/reminderRoutes');
 
 // Set express application
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Have Node serve the files for our built React app
-app.use(express.static(path.resolve(__dirname, '../eminders/build')));
+//Set up default mongoose connection
+mongoose.connect(process.env.DB_SOURCE, {useNewUrlParser: true});
+const db = mongoose.connection;
+db.on('open', () => console.log('Connected to MongoDB'));
 
 // Set up routes
 app.use('/api/v1/reminder', reminderRouter);
-
-// Handle GET requests to /api route
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello from server (Megan)!" });
-});
-
-// All other GET requests not handled before will return our React app
-app.get('*', (req, res) => {
-res.sendFile(path.resolve(__dirname, '../eminders/build', 'index.html'));
-});
 
 /* Set up middlewares */
 // Error handling middleware
