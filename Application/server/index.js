@@ -1,11 +1,22 @@
-require("dotenv").config()
 const express = require("express");
+const morgan = require('morgan');
+const helmet = require('helmet');
+const cors = require("cors");
+
+require("dotenv").config()
+const PORT = process.env.PORT || 3001;
+
 const mongoose = require('mongoose');
-const reminderRouter = require('./src/routes/reminderRoutes');
+// middleware = require
+const api = require('./src/routes');
 
 // Set express application
 const app = express();
-const PORT = process.env.PORT || 3001;
+
+app.use(morgan('dev'));
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
 
 //Set up default mongoose connection
 mongoose.connect(process.env.DB_SOURCE, {useNewUrlParser: true});
@@ -13,7 +24,7 @@ const db = mongoose.connection;
 db.on('open', () => console.log('Connected to MongoDB'));
 
 // Set up routes
-app.use('/api/v1/reminder', reminderRouter);
+app.use('/api/v1', api);
 
 /* Set up middlewares */
 // Error handling middleware
