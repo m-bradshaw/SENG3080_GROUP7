@@ -1,9 +1,18 @@
-import {Button, Form, Row, Col, Container} from 'react-bootstrap';
+import {Button, Form, Row, Col, Container, Stack} from 'react-bootstrap';
 import '../css/layout.css';
-import {React, useState} from 'react';
+import {Children, React, useState} from 'react';
 import GetData from './HandleData';
 
 function ExistingMessage(props) {
+
+    const handleEditClick = () => {
+        props.editClickHandler(props); 
+    }
+
+    const handleDeleteClick = () => {
+        props.deleteClickHandler(props); 
+    }
+
     return(
         <Row>
             {console.log(props)}
@@ -15,6 +24,12 @@ function ExistingMessage(props) {
             </Col>
             <Col>
                 <p>{props.message}</p>       
+            </Col>
+            <Col>
+                <Stack direction="horizontal" gap={3} className="alignCenter">
+                    <Button size="sm" variant='warning' onClick={handleEditClick}>Edit</Button>
+                    <Button size="sm" variant='danger' onClick={handleDeleteClick}>Delete</Button>
+                </Stack>                
             </Col>
         </Row> 
     );

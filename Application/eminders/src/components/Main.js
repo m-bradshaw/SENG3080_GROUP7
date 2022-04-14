@@ -14,48 +14,71 @@ class Main extends Component {
     super(props);    
     this.state = {
         dataList: [],
-        currentData: null, 
+        currentData: null, // We want to be able to set this with data from a clicked reminder (to edit)
     }
     this.dataSource = "api/stub/main";
+
+    this.messageFormSubmit = this.messageFormSubmit.bind(this); 
+    this.setData = this.setData.bind(this); 
+    this.existingMessageDelete = this.existingMessageDelete.bind(this); 
+    this.existingMessageEdit = this.existingMessageEdit.bind(this); 
+  }
+
+  logState() {
+    console.log("dataList:");
+    console.log(this.state.dataList); 
+    console.log("currentData:");
+    console.log(this.state.currentData);
   }
 
   // Fetch the list on first mount
   componentDidMount() {
-    console.log("compoenentDidMount");
+    console.log("componentDidMount");
     RequestJsonData(this.dataSource, this.setData);
   }
 
   compoenentDidUpdate() {
-    console.log("compoenentDidUpdate");
+    console.log("componentDidUpdate");
     RequestJsonData(this.dataSource, this.setData); 
   }
 
+  // Sets the list of existing reminders
   setData = (json) => {
     if (json) {
-        console.log("setData called with...");
-        console.log(json);
         this.setState({dataList: json});
     }
-
-    // console log
-    console.log("DataList:");
-    console.log(this.state.dataList); 
-    console.log("CurrentData:")
-    console.log(this.state.currentData);
+    this.logState(); 
   }
 
   // This method can be called from the MessageForm
+  // Basically in here we want to be able to push the data to the server for either post or patch
   messageFormSubmit = (json) => {
     if (json) {
-        console.log("messageFormSubmit called in Main with...");
-        console.log(json);
-        this.setState({currentData: json});
+        console.log("messageFormSubmit called in Main");
     }
+
+    this.logState(); 
+  }
+
+  // Button handler for editing an existing message. 
+  // In here we want to be able to fill in the fields of the create/edit area (and reload it) with the values from the existing message. 
+  existingMessageEdit = (value) => {
+    console.log("Existing message edit clicked");
+    this.setState({currentData: value});
+    console.log(value); 
+  }
+
+  // We should probably do a toast popup or something to confirm in here before actually removing from our list. 
+  existingMessageDelete = (value) => {
+    console.log("Existing message delete clicked");    
+    console.log(value); 
   }
 
   render() {
+    console.log("Rendering Main:");
     const jsonObject = this.state.dataList;
-    const fillData = this.state.currentData; 
+    //const currentFill = this.state.currentData; 
+    this.logState();
 
     // Map the incoming server data to a list of ExistingMessage components
     var mapData = (show) => {
@@ -65,7 +88,7 @@ class Main extends Component {
                   {
                     jsonObject.map((value, index) => {
                         return (
-                          <ExistingMessage date={value.date} message={value.message} time={value.time} key={index}>{index}</ExistingMessage>                                                    
+                          <ExistingMessage date={value.date} message={value.message} time={value.time} key={index} editClickHandler={this.existingMessageEdit} deleteClickHandler={this.existingMessageDelete}>{index}</ExistingMessage>                                                    
                         );
                     })
                   }
@@ -81,7 +104,6 @@ class Main extends Component {
 
     return (
       <div>
-
         <Container className='m-3'>
           <NavLink to={'../login'}>
             <Button>Log Out</Button>
@@ -95,7 +117,7 @@ class Main extends Component {
               <h1 className='alignCenter'>Welcome!</h1>
 
               <h4>Create/Edit Reminder:</h4> 
-              <MessageForm responseHandler={this.messageFormSubmit} fillData={fillData}></MessageForm>
+              <MessageForm responseHandler={this.messageFormSubmit} fillData={this.state.currentData}></MessageForm>
 
               <h4>My Reminders:</h4> 
 

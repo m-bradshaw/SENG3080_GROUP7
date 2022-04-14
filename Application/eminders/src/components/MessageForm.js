@@ -5,7 +5,6 @@ import {React, useState} from 'react';
 function MessageForm(props) {
     const [validated, setValidated] = useState(false);
     const [recurring, setRecurring] = useState(false);
-    const [defaultData, setDefaultData] = useState(props.fillData)
 
     const handleSubmit = (event) => {
 
@@ -33,8 +32,10 @@ function MessageForm(props) {
     const handleValidSubmission = (event) => {
 
         // Stop the page from submitting the form itself / reloading.
-        event.preventDefault();
-        event.stopPropagation();
+
+        //event.preventDefault(); // Comment this out to stop the page update
+
+        //event.stopPropagation(); 
 
         console.log("Handling Valid Submission");
 
@@ -57,10 +58,16 @@ function MessageForm(props) {
 
     return (
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        {console.log("Rendering message form:")}
 
+{
+    console.log("Default data in message form: ")}{
+    // We should be able to fill the defaults here with props.fillData if applicable
+    console.log(props.fillData)
+}
             <Form.Group className="mb-3" controlId='formTextMessage'>
                 <Form.Label>Message:</Form.Label>
-                <Form.Control as="textarea" rows={5} placeholder='Enter message here...' required></Form.Control>      
+                <Form.Control as="textarea" rows={5} placeholder='Enter message here...' required defaultValue={(props.fillData) ? props.fillData.message : null}></Form.Control>      
             </Form.Group>        
             <Form.Group className="mb-3" controlId='formDate'>
                 <Form.Label>Date:</Form.Label>
