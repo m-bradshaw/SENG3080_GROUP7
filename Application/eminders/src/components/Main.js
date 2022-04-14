@@ -4,7 +4,7 @@ import { NavLink} from 'react-router-dom';
 import '../css/layout.css';
 import MessageForm from './MessageForm';
 
-import {Button, Container, Row, Col} from 'react-bootstrap';
+import {Button, Container, Row, Col, Stack} from 'react-bootstrap';
 import ExistingMessage from './ExistingMessage';
 
 class Main extends Component {
@@ -38,6 +38,7 @@ class Main extends Component {
   render() {
     const jsonObject = this.state.dataList;
 
+    // Map the incoming server data to a list of ExistingMessage components
     var mapData = (show) => {
         if (show) {
             return (
@@ -61,35 +62,32 @@ class Main extends Component {
 
     return (
       <div>
-        <Container>
+        <Container className='m-3'>
+          <NavLink to={'../login'}>
+            <Button>Log Out</Button>
+          </NavLink>  
+        </Container>
 
-          <Row className='alignCenter'>
-            <Col>
-              <NavLink to={'../login'}>
-                <Button>
-                  Log Out
-                </Button>
-              </NavLink>  
-            </Col>
-            <Col xs={8}>
-              <h1>
-                Welcome!
-              </h1>
-            </Col>
-            <Col></Col>
-          </Row>
+        <Stack gap={3} className="mx-auto m-3">
 
-          <Row>
+          <div className='alignCenter'>
+            <h1>
+              Welcome!
+            </h1>
+          </div>
+
+          <div>
             <MessageForm></MessageForm>
-          </Row>
+          </div>   
 
-          <Row>
+          <div className='alignCenter'>
             { mapData(this.state.dataList.length >= 1) }    
             {/* THIS IS WHERE THE LIST OF REMINDERS SHOULD GO */}
-          </Row>
-          
-        </Container>
-    </div>
+          </div>      
+
+        </Stack>
+
+      </div>
     );
   }
 }
