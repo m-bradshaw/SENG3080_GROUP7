@@ -42,15 +42,15 @@ class Main extends Component {
     var mapData = (show) => {
         if (show) {
             return (
-                <div>
-                {
-                  jsonObject.map((value, index) => {
-                      return (
-                        <ExistingMessage date={value.date} message={value.message} time={value.time} key={index}>{index}</ExistingMessage>                                                    
-                      );
-                  })
-                }
-                </div>
+                <Container className="alignCenter">
+                  {
+                    jsonObject.map((value, index) => {
+                        return (
+                          <ExistingMessage date={value.date} message={value.message} time={value.time} key={index}>{index}</ExistingMessage>                                                    
+                        );
+                    })
+                  }
+                </Container>
             );
         }
         else {
@@ -62,30 +62,33 @@ class Main extends Component {
 
     return (
       <div>
+
         <Container className='m-3'>
           <NavLink to={'../login'}>
             <Button>Log Out</Button>
           </NavLink>  
         </Container>
 
-        <Stack gap={3} className="mx-auto m-3">
+        <Container className='flex'>
+          <div className='m-3'>
 
-          <div className='alignCenter'>
-            <h1>
-              Welcome!
-            </h1>
-          </div>
+            <Stack gap={4} className="mx-auto">
+              <h1 className='alignCenter'>Welcome!</h1>
 
-          <div>
-            <MessageForm></MessageForm>
-          </div>   
+              <h4>Create/Edit Reminder:</h4> 
+              <MessageForm></MessageForm>
 
-          <div className='alignCenter'>
-            { mapData(this.state.dataList.length >= 1) }    
-            {/* THIS IS WHERE THE LIST OF REMINDERS SHOULD GO */}
-          </div>      
+              <h4>My Reminders:</h4> 
 
-        </Stack>
+              <div>
+                { mapData(this.state.dataList.length >= 1) }    
+                {/* THIS IS WHERE THE LIST OF REMINDERS SHOULD GO */}
+              </div>
+
+            </Stack>
+
+          </div>           
+        </Container>
 
       </div>
     );

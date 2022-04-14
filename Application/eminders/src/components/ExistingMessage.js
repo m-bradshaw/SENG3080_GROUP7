@@ -5,20 +5,18 @@ import GetData from './HandleData';
 
 function ExistingMessage(props) {
     return(
-        <Container>
+        <Row>
             {console.log(props)}
-            <Row>
-                <Col md="2">
-                    <p>{props.date}</p>
-                </Col>
-                <Col md="2">
-                    <p>{props.time}</p>
-                </Col>
-                <Col md="auto">
-                    <p>{props.message}</p>       
-                </Col>
-            </Row> 
-        </Container>
+            <Col xs={3}>
+                <p>{props.date}</p>
+            </Col>
+            <Col xs={2}>
+                <p>{props.time}</p>
+            </Col>
+            <Col>
+                <p>{props.message}</p>       
+            </Col>
+        </Row> 
     );
 }
 
