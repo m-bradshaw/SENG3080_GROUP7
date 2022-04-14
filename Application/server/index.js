@@ -20,11 +20,11 @@ app.use('/api/v1', api);
 app.use(middleware.notFound);
 app.use(middleware.errorHandler);
 
-require('./cronJobs');
+require('./src/services/cronService');
 
-// Have Node serve the files for our built React app
-//Not totally sure about this
-app.use(express.static(path.resolve(__dirname, '../eminders/build')));
+// // Have Node serve the files for our built React app
+// //Not totally sure about this
+// app.use(express.static(path.resolve(__dirname, '../eminders/build')));
 
 
 //Set up default mongoose connection
