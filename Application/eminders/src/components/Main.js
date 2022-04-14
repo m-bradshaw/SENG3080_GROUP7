@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GetData from './HandleData';
+import RequestJsonData from './HandleData';
 import { NavLink} from 'react-router-dom';
 import '../css/layout.css';
 import MessageForm from './MessageForm';
@@ -13,18 +13,21 @@ class Main extends Component {
   constructor(props){      
     super(props);    
     this.state = {
-        dataList: [[]]
+        dataList: [],
+        currentData: null, 
     }
     this.dataSource = "api/stub/main";
   }
 
   // Fetch the list on first mount
   componentDidMount() {
-    GetData(this.dataSource, this.setData);
+    console.log("compoenentDidMount");
+    RequestJsonData(this.dataSource, this.setData);
   }
 
   compoenentDidUpdate() {
-    GetData(this.dataSource, this.setData); 
+    console.log("compoenentDidUpdate");
+    RequestJsonData(this.dataSource, this.setData); 
   }
 
   setData = (json) => {
@@ -33,10 +36,26 @@ class Main extends Component {
         console.log(json);
         this.setState({dataList: json});
     }
+
+    // console log
+    console.log("DataList:");
+    console.log(this.state.dataList); 
+    console.log("CurrentData:")
+    console.log(this.state.currentData);
+  }
+
+  // This method can be called from the MessageForm
+  messageFormSubmit = (json) => {
+    if (json) {
+        console.log("messageFormSubmit called in Main with...");
+        console.log(json);
+        this.setState({currentData: json});
+    }
   }
 
   render() {
     const jsonObject = this.state.dataList;
+    const fillData = this.state.currentData; 
 
     // Map the incoming server data to a list of ExistingMessage components
     var mapData = (show) => {
@@ -76,7 +95,7 @@ class Main extends Component {
               <h1 className='alignCenter'>Welcome!</h1>
 
               <h4>Create/Edit Reminder:</h4> 
-              <MessageForm></MessageForm>
+              <MessageForm responseHandler={this.messageFormSubmit} fillData={fillData}></MessageForm>
 
               <h4>My Reminders:</h4> 
 
