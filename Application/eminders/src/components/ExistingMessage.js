@@ -15,22 +15,34 @@ function ExistingMessage(props) {
 
     return(
         <Row>
+
             {console.log(props)}
-            <Col xs={3}>
-                <p>{props.date}</p>
-            </Col>
+            {console.log(props.values)}
+
             <Col xs={2}>
-                <p>{props.time}</p>
+                <p>{props.values.date}</p>
             </Col>
-            <Col>
-                <p>{props.message}</p>       
+            <Col xs={1}>
+                <p>{props.values.time}</p>
             </Col>
-            <Col>
-                <Stack direction="horizontal" gap={3} className="alignCenter">
+            <Col xs={4}>
+                <p>{props.values.message}</p>       
+            </Col>
+
+            <Col xs={1} className="alignCenter">
+                {(props.values.daily) ? <p>Daily</p> : null}
+                {(props.values.weekly) ? <p>Weekly</p> : null}
+                {(props.values.monthly) ? <p>Mmonthly</p> : null}
+                {(props.values.yearly) ? <p>Yearly</p> : null}
+            </Col>
+
+            <Col xs={2}>
+                <Stack direction="horizontal" gap={2}>
                     <Button size="sm" variant='warning' onClick={handleEditClick}>Edit</Button>
                     <Button size="sm" variant='danger' onClick={handleDeleteClick}>Delete</Button>
                 </Stack>                
             </Col>
+
         </Row> 
     );
 }

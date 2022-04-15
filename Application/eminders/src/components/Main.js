@@ -3,7 +3,7 @@ import RequestJsonData from './HandleData';
 import { NavLink} from 'react-router-dom';
 import '../css/layout.css';
 import MessageForm from './MessageForm';
-import {Button, Container, Row, Col, Stack} from 'react-bootstrap';
+import {Button, Container, Row, Col, Stack, ListGroup} from 'react-bootstrap';
 import ExistingMessage from './ExistingMessage';
 
 class Main extends Component {
@@ -63,16 +63,16 @@ class Main extends Component {
 
   // Button handler for editing an existing message. 
   // In here we want to be able to fill in the fields of the create/edit area (and reload it) with the values from the existing message. 
-  existingMessageEdit = (value) => {
+  existingMessageEdit = (data) => {
     console.log("Existing message edit clicked");
-    this.setState({currentData: value});
-    console.log(value); 
+    this.setState({currentData: data.values});
+    console.log(data); 
   }
 
   // We should probably do a toast popup or something to confirm in here before actually removing from our list. 
-  existingMessageDelete = (value) => {
+  existingMessageDelete = (data) => {
     console.log("Existing message delete clicked");    
-    console.log(value); 
+    console.log(data); 
   }
 
   render() {
@@ -85,13 +85,17 @@ class Main extends Component {
         if (show) {
             return (
                 <Container className="alignCenter">
-                  {
-                    jsonObject.map((value, index) => {
-                        return (
-                          <ExistingMessage date={value.date} message={value.message} time={value.time} key={index} editClickHandler={this.existingMessageEdit} deleteClickHandler={this.existingMessageDelete}>{index}</ExistingMessage>                                                    
-                        );
-                    })
-                  }
+                  <ListGroup variant="flush">
+                    {
+                      jsonObject.map((value, index) => {
+                          return (
+                            <ListGroup.Item key={index}>
+                              <ExistingMessage values={value} key={index} editClickHandler={this.existingMessageEdit} deleteClickHandler={this.existingMessageDelete}>{index}</ExistingMessage>                                                    
+                            </ListGroup.Item>                            
+                          );
+                      })
+                    }
+                  </ListGroup>
                 </Container>
             );
         }
@@ -111,7 +115,7 @@ class Main extends Component {
         </Container>
 
         <Container className='flex'>
-          <div className='m-3'>
+          <div className='m-2'>
             <Stack gap={4} className="mx-auto">
 
               <h1 className='alignCenter'>Welcome!</h1>
