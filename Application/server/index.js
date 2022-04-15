@@ -23,11 +23,42 @@ app.get("/api/stub/login", (req, res) => {
 
 // Handle GET requests to /api/stub/main route
 app.get("/api/stub/main", (req, res) => {
-  var dList = ["monday", "tuesday", "wednesday"];
-  var tList = ["10:00", "2:00", "1:15"];
-  var msgList = ["Do a thing", "Do another thing", "Sleep I guess?"];
-  res.json([{date: dList[0], time: tList[0], message: msgList[0]}, {date: dList[1], time: tList[1], message: msgList[1]}, {date: dList[2], time: tList[2], message: msgList[2]}]);
-  console.log('Sent day list for get request at /api/stub/main')
+
+  var option_1 = {
+    message: "Do a thing", 
+    date: "01/01/2001", 
+    time: "10:00 AM", 
+    recurring: true, 
+    daily: false, 
+    weekly: true, 
+    monthly: false, 
+    yearly: false                
+  }
+  var option_2 = {
+    message: "Do another thing", 
+    date: "08/21/2016", 
+    time: "1:23 PM", 
+    recurring: false, 
+    daily: false, 
+    weekly: false, 
+    monthly: false, 
+    yearly: false                
+  }
+  var option_3 = {
+    message: "Sleep or something?", 
+    date: "03/07/2020", 
+    time: "11:30 PM", 
+    recurring: true, 
+    daily: true, 
+    weekly: false, 
+    monthly: false, 
+    yearly: false                
+  }
+
+  res.json([option_1, option_2, option_3]);
+
+  console.log('Sent day list for get request at /api/stub/main');
+
 });
 
 // Test loading a page with...
