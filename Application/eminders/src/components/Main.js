@@ -38,13 +38,13 @@ class Main extends Component {
 
   // Fetch the list on first mount
   componentDidMount() {
-    console.log("componentDidMount");
+    console.log("Main - Mount");
     RequestJsonData(this.dataSource, this.setData);
   }
 
-  compoenentDidUpdate() {
-    console.log("componentDidUpdate");
-    RequestJsonData(this.dataSource, this.setData); 
+  componentDidUpdate() {
+    console.log("Main - Update");
+    // RequestJsonData(this.dataSource, this.setData); 
   }
 
   // Sets the list of existing reminders
