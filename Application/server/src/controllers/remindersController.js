@@ -18,7 +18,8 @@ async function getMultiple(req, res, next) {
   
 async function create(req, res, next) {
   try {
-    res.json(await reminderService.create(req.body));
+    const response = await reminderService.create(req.body)
+    res.json(response);
   } catch (err) {
     next(err);
   }
