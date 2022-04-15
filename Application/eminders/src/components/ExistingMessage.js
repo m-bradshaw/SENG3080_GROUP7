@@ -16,8 +16,8 @@ function ExistingMessage(props) {
     return(
         <Row>
 
-            {console.log(props)}
-            {console.log(props.values)}
+            {/* {console.log(props)} */}
+            {/* {console.log(props.values)} */}
 
             <Col xs={2}>
                 <p>{props.values.date}</p>

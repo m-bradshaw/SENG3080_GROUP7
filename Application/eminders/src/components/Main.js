@@ -21,6 +21,7 @@ class Main extends Component {
     // Ensure component state is bound to changes from the following methods
     this.setData = this.setData.bind(this); 
     this.messageFormSubmit = this.messageFormSubmit.bind(this);     
+    this.messageFormReset = this.messageFormReset.bind(this);     
     this.existingMessageDelete = this.existingMessageDelete.bind(this); 
     this.existingMessageEdit = this.existingMessageEdit.bind(this); 
   }
@@ -60,9 +61,23 @@ class Main extends Component {
   messageFormSubmit = (json) => {
     if (json) {
         console.log("messageFormSubmit called in Main");
+        console.log(json); 
+        alert(json); 
     }
+    this.setState({currentData: null});
 
-    this.logState(); 
+    //this.logState(); 
+  }
+
+  messageFormReset = (json) => {
+
+    this.triggerAlert("Message form Reset triggered!");
+    if (json) {
+        console.log("messageFormReset called in Main");
+    }
+    this.setState({currentData: null});
+
+    //this.logState(); 
   }
 
   // Button handler for editing an existing message. 
@@ -84,7 +99,7 @@ class Main extends Component {
   render() {
     console.log("Rendering Main:");
     const jsonObject = this.state.dataList;
-    this.logState();
+    //this.logState();
 
     // Map the incoming server data to a list of ExistingMessage components
     var mapData = (show) => {
@@ -127,7 +142,7 @@ class Main extends Component {
               <h1 className='alignCenter'>Welcome!</h1>
 
               <h4>Create/Edit Reminder:</h4> 
-              <MessageForm responseHandler={this.messageFormSubmit} fillData={this.state.currentData}></MessageForm>
+              <MessageForm submitResponseHandler={this.messageFormSubmit} resetResponseHandler={this.messageFormReset} fillData={this.state.currentData}></MessageForm>
 
               <h4>My Reminders:</h4> 
 

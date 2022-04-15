@@ -2,10 +2,6 @@ import {Button, Form, Row, Col, Stack} from 'react-bootstrap';
 import '../css/layout.css';
 import {React, useState, Component} from 'react';
 
-function triggerAlert(message) {
-    return alert(message); 
-}
-
 class MessageForm extends Component {
 
     constructor(props) {
@@ -26,17 +22,17 @@ class MessageForm extends Component {
 
     componentDidMount() {
         console.log("MessageForm - Mount");
-        console.log(this.state.editMessage); 
     }
 
     componentDidUpdate() {
         console.log("MessageForm - Update")
-        console.log(this.state.editMessage); 
+        if (this.props.fillData === null) {
+            
+        }
+        //this.setState({editMessage: (this.props.fillData !== null)})
     }
     
     handleSubmit = (event) => {
-
-        triggerAlert("Handling submit")
 
         const form = event.currentTarget;
         const valid = form.checkValidity(); 
@@ -51,16 +47,6 @@ class MessageForm extends Component {
 
         // Validation has been done (set colours)
         this.setState({validated: true});
-    };
-
-    handleReset = (event) => {
-        triggerAlert("Handling reset");
-    }
-
-    handleRecurringToggle = (event) => {
-        if (event.target) {
-            this.setState({recurring: event.target.checked}); 
-        }
     };
 
     handleValidSubmission = (event) => {
@@ -84,8 +70,18 @@ class MessageForm extends Component {
             }
 
             // Call the response handler to set the data in the main component
-            this.props.responseHandler(newData); 
+            this.props.submitResponseHandler(newData); 
         }        
+    };
+
+    handleReset = (event) => {
+        this.props.resetResponseHandler(event); 
+    }
+
+    handleRecurringToggle = (event) => {
+        if (event.target) {
+            this.setState({recurring: event.target.checked}); 
+        }
     };
 
     render() {
@@ -136,7 +132,7 @@ class MessageForm extends Component {
     
                 <Stack direction="horizontal" gap={3} className='alignCenter'>
                     <Button variant='primary' type='submit'>Submit</Button>  
-                    <Button variant='primary' type='reset' value="Reset">Clear</Button>  
+                    <Button variant='primary' type='reset' value="Reset">Reset</Button>  
                 </Stack>
     
             </Form> 
