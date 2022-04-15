@@ -26,8 +26,8 @@ app.get("/api/stub/main", (req, res) => {
 
   var option_1 = {
     message: "Do a thing", 
-    date: "01/01/2001", 
-    time: "10:00 AM", 
+    date: "2001-01-01", 
+    time: "10:00", 
     recurring: true, 
     daily: false, 
     weekly: true, 
@@ -36,8 +36,8 @@ app.get("/api/stub/main", (req, res) => {
   }
   var option_2 = {
     message: "Do another thing", 
-    date: "08/21/2016", 
-    time: "1:23 PM", 
+    date: "2016-08-21", 
+    time: "13:23", 
     recurring: false, 
     daily: false, 
     weekly: false, 
@@ -46,8 +46,8 @@ app.get("/api/stub/main", (req, res) => {
   }
   var option_3 = {
     message: "Sleep or something?", 
-    date: "03/07/2020", 
-    time: "11:30 PM", 
+    date: "2020-03-07", 
+    time: "23:30", 
     recurring: true, 
     daily: true, 
     weekly: false, 

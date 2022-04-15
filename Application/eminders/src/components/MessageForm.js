@@ -32,9 +32,8 @@ function MessageForm(props) {
     const handleValidSubmission = (event) => {
 
         // Stop the page from submitting the form itself / reloading.
-
-        //event.preventDefault(); // Comment this out to stop the page update
-        //event.stopPropagation(); 
+        // event.preventDefault();
+        // event.stopPropagation(); 
 
         console.log("Handling Valid Submission");
 
@@ -68,10 +67,12 @@ function MessageForm(props) {
                 <Form.Label>Message:</Form.Label>
                 <Form.Control as="textarea" rows={5} placeholder='Enter message here...' required defaultValue={(props.fillData) ? props.fillData.message : null}></Form.Control>      
             </Form.Group>        
+
             <Form.Group className="mb-3" controlId='formDate'>
                 <Form.Label>Date:</Form.Label>
                 <Form.Control type="date" required defaultValue={(props.fillData) ? props.fillData.date : null}></Form.Control>      
-            </Form.Group>        
+            </Form.Group>       
+
             <Form.Group className="mb-3" controlId='formTime'> 
                 <Form.Label>Time:</Form.Label>
                 <Form.Control type="time" required defaultValue={(props.fillData) ? props.fillData.time : null}></Form.Control>      
@@ -81,6 +82,7 @@ function MessageForm(props) {
                 <Form.Group className="mb-3" controlId="formRecurringCheckbox" onChange={handleRecurringToggle}>
                     <Form.Check type="checkbox" label="Recurring" defaultValue={(props.fillData) ? props.fillData.recurring : null}/>
                 </Form.Group>  
+                
                 <Form.Group className="mb-3" controlId="formTimeRadios" disabled={!recurring}>
                     <Form.Check inline type="radio" name="timeGroup" label="Daily" disabled={!recurring} id="Daily" defaultValue={(props.fillData) ? props.fillData.daily : null}/>
                     <Form.Check inline type="radio" name="timeGroup" label="Weekly" disabled={!recurring} id="Weekly" defaultValue={(props.fillData) ? props.fillData.weekly : null}/>

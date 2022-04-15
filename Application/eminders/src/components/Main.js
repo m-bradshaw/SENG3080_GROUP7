@@ -3,7 +3,6 @@ import RequestJsonData from './HandleData';
 import { NavLink} from 'react-router-dom';
 import '../css/layout.css';
 import MessageForm from './MessageForm';
-
 import {Button, Container, Row, Col, Stack} from 'react-bootstrap';
 import ExistingMessage from './ExistingMessage';
 
@@ -11,15 +10,17 @@ class Main extends Component {
 
   // Initialize the state
   constructor(props){      
-    super(props);    
+    super(props); 
+
     this.state = {
         dataList: [],
         currentData: null, // We want to be able to set this with data from a clicked reminder (to edit)
     }
     this.dataSource = "api/stub/main";
 
-    this.messageFormSubmit = this.messageFormSubmit.bind(this); 
+    // Ensure component state is bound to changes from the following methods
     this.setData = this.setData.bind(this); 
+    this.messageFormSubmit = this.messageFormSubmit.bind(this);     
     this.existingMessageDelete = this.existingMessageDelete.bind(this); 
     this.existingMessageEdit = this.existingMessageEdit.bind(this); 
   }
@@ -111,8 +112,8 @@ class Main extends Component {
 
         <Container className='flex'>
           <div className='m-3'>
-
             <Stack gap={4} className="mx-auto">
+
               <h1 className='alignCenter'>Welcome!</h1>
 
               <h4>Create/Edit Reminder:</h4> 
@@ -126,7 +127,6 @@ class Main extends Component {
               </div>
 
             </Stack>
-
           </div>           
         </Container>
 
