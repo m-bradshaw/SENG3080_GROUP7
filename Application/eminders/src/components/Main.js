@@ -77,7 +77,6 @@ class Main extends Component {
   render() {
     console.log("Rendering Main:");
     const jsonObject = this.state.dataList;
-    //const currentFill = this.state.currentData; 
     this.logState();
 
     // Map the incoming server data to a list of ExistingMessage components
