@@ -38,8 +38,8 @@ function ExistingMessage(props) {
 
             <Col xs={2}>
                 <Stack direction="horizontal" gap={2}>
-                    <Button size="sm" variant='warning' onClick={handleEditClick}>Edit</Button>
-                    <Button size="sm" variant='danger' onClick={handleDeleteClick}>Delete</Button>
+                    <Button size="sm" variant='outline-warning' onClick={handleEditClick}>Edit</Button>
+                    <Button size="sm" variant='outline-danger' onClick={handleDeleteClick}>Delete</Button>
                 </Stack>                
             </Col>
 
