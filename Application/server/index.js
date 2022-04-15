@@ -22,6 +22,7 @@ db.on('open', () => console.log('Connected to MongoDB'));
 
 app.use('/api/v1', api);
 app.use(middleware.notFound);
+app.use(middleware.errorHandler);
 
 // Start the server
 const PORT = process.env.PORT || 3001;

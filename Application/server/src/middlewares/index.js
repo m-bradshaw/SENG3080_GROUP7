@@ -1,6 +1,6 @@
 function notFound(req, res, next) {
     res.status(404);
-    const error = new Error(`404 - Not Found \n - ${req.originalUrl}`);
+    const error = new Error(`404 - Not Found - ${req.originalUrl}`);
     next(error);
   }
   
@@ -9,7 +9,7 @@ function errorHandler(err, req, res, next) {
     res.status(statusCode);
     res.json({
       message: err.message,
-      stack: err.stack,
+      response: err.response ? err.response.data : null,
     });
   }
   
