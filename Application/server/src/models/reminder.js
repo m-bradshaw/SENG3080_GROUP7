@@ -3,16 +3,20 @@ const mongoose = require("mongoose")
 const reminderSchema = new mongoose.Schema({
     title: { 
         type: String,
-        required: true
+        maxlength: [120, "reminder 'title' is too long!"],
+        required: [true, "a reminder must have a 'title' field"]
     },
-    body: String,
+    body: {
+        type: String,
+        maxlength: [2000, "reminder 'body' is too long!"]
+    },
     startDate: {
         type: Date, 
         default: Date.now
     },
     interval: { 
         type: Number,
-        required: true
+        required: [true, "a reminder must have an 'interval' field"]
     },
     recurring: {
         type: Boolean,
