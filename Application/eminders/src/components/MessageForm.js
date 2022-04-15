@@ -84,6 +84,12 @@ class MessageForm extends Component {
         }
     };
 
+    handleRecurringRadio = (event) => {
+        if (event.target) {
+            //this.setState({recurring: event.target.checked}); 
+        }
+    };
+
     render() {
         return (
             <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit} onReset={this.handleReset}>
@@ -96,20 +102,17 @@ class MessageForm extends Component {
     }
                 <Form.Group className="mb-3" controlId='formTextMessage'>
                     <Form.Label>Message:</Form.Label>
-                    <Form.Control as="textarea" rows={5} placeholder='Enter message here...' required></Form.Control>      
-                    {/* <Form.Control as="textarea" rows={5} placeholder='Enter message here...' required defaultValue={(props.fillData) ? props.fillData.message : null}></Form.Control>       */}
+                    <Form.Control as="textarea" rows={5} required placeholder='Enter message here...' defaultValue={(this.props.fillData) ? this.props.fillData.message : ""}></Form.Control>      
                 </Form.Group>        
     
                 <Form.Group className="mb-3" controlId='formDate'>
                     <Form.Label>Date:</Form.Label>
-                    {/* <Form.Control type="date" required defaultValue={(props.fillData) ? props.fillData.date : null}></Form.Control>       */}
-                    <Form.Control type="date" required></Form.Control>      
+                    <Form.Control type="date" required defaultValue={(this.props.fillData) ? this.props.fillData.date : null}></Form.Control>           
                 </Form.Group>       
     
                 <Form.Group className="mb-3" controlId='formTime'> 
                     <Form.Label>Time:</Form.Label>
-                    {/* <Form.Control type="time" required defaultValue={(props.fillData) ? props.fillData.time : null}></Form.Control>       */}
-                    <Form.Control type="time" required></Form.Control>      
+                    <Form.Control type="time" required defaultValue={(this.props.fillData) ? this.props.fillData.time : null}></Form.Control>      
                 </Form.Group>
                 
                 <Stack direction="horizontal" gap={3} className="alignCenter">
