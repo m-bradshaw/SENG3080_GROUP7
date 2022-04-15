@@ -2,12 +2,17 @@ import {Button, Form, Row, Col, Stack} from 'react-bootstrap';
 import '../css/layout.css';
 import {React, useState} from 'react';
 
+function triggerAlert(message) {
+    return alert(message); 
+}
 function MessageForm(props) {
     const [validated, setValidated] = useState(false);
     const [recurring, setRecurring] = useState(false);
+    triggerAlert(editMode); 
 
     const handleSubmit = (event) => {
 
+        triggerAlert("Handling submit")
         const form = event.currentTarget;
         const valid = form.checkValidity(); 
         if (!valid) {
@@ -23,6 +28,9 @@ function MessageForm(props) {
         setValidated(true);
     };
 
+    const handleReset = (event) => {
+        triggerAlert("Handling reset");
+    }
     const handleRecurringToggle = (event) => {
         if (event.target) {
             setRecurring(event.target.checked); 
@@ -55,7 +63,7 @@ function MessageForm(props) {
     };
 
     return (
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form noValidate validated={validated} onSubmit={handleSubmit} onReset={handleReset}>
         {console.log("Rendering message form:")}
 
 {
@@ -83,7 +91,8 @@ function MessageForm(props) {
             
             <Stack direction="horizontal" gap={3} className="alignCenter">
                 <Form.Group className="mb-3" controlId="formRecurringCheckbox" onChange={handleRecurringToggle}>
-                    <Form.Check type="checkbox" label="Recurring" checked={(props.fillData) ? props.fillData.recurring : null}/>
+                    <Form.Check type="checkbox" label="Recurring"/>
+                    {/* <Form.Check type="checkbox" label="Recurring" checked={(props.fillData) ? props.fillData.recurring : null}/> */}
                 </Form.Group>  
 
                 <Form.Group className="mb-3" controlId="formTimeRadios" disabled={!recurring}>

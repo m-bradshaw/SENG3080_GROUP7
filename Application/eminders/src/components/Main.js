@@ -32,6 +32,10 @@ class Main extends Component {
     console.log(this.state.currentData);
   }
 
+  triggerAlert(message) {
+    alert(message); 
+  }
+
   // Fetch the list on first mount
   componentDidMount() {
     console.log("componentDidMount");
@@ -71,8 +75,10 @@ class Main extends Component {
 
   // We should probably do a toast popup or something to confirm in here before actually removing from our list. 
   existingMessageDelete = (data) => {
-    console.log("Existing message delete clicked");    
+    var msg = "Existing message delete clicked";
+    console.log(msg);    
     console.log(data); 
+    this.triggerAlert(msg); 
   }
 
   render() {
