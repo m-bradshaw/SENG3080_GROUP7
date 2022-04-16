@@ -1,5 +1,6 @@
 const Reminder = require("../models/reminder")
 const nodemailer = require('nodemailer')
+const res = require("express/lib/response")
 
 
 async function get(id){
@@ -8,29 +9,25 @@ async function get(id){
 
 async function getMultiple(){
     console.log("getMultiple")
+    GetMessagesByDate(new Date())
 }
 
 async function create(body) {
     const reminder = new Reminder({
       title: body.title,
-      body: body.body,
-      interval: body.interval,
-      recurring: body.recurring, 
+      message: body.body,
+      nextSendDate: new Date(new Date() + 1 * 60 * 1000), // Change in the frontend to concat (date + time)
+      recurring: body.recurring,
+      daily: body.daily,
+      weekly: body.weekly,
+      monthly: body.monthly,
+      yearly: body.yearly
     })
 
     const inserted = await reminder.save()
-
-    // Remove some fields that the clients do not need to know
-    const response = {
-      title: inserted.title,
-      content: inserted.body,
-      startsAt: inserted.startDate,
-      repeats: inserted.recurring
-    }    
-
     return {
       message: "Created reminder",
-      reminder: response
+      reminder: inserted
     }
 }
 
@@ -47,36 +44,46 @@ function checkForMessages()
 {
   console.log("CheckForMessages");
 
-  var now = Date.now;
+  var now = new Date();
 
-  var messages = GetMessagesByDate(now);
+  var messages = GetMessagesByDate(now).then((err, res) => {
+    console.log("This is " + res);
+  });
 
-  EmailMessages(messages);
+  //EmailMessages(messages);
 
-  messages.forEach(message =>
-  { 
-    IncrementReocuringDate(message);
-  })
 }
 
 //This function will read from the database.
 //The date parameter will difine the date that is used in the "where" part of the database request.
-function GetMessagesByDate(date)
+async function GetMessagesByDate(date)
 {
+  let reminders = [];
+
+  date.setSeconds(0,0)
   //read from the database to get the messages that are correct down to the minute. 
+  Reminder.find({nextSendDate: {
+    $gte: date, 
+    $lt: new Date(date.getTime() + 60 * 1000)
+  }}, (err, results) => {
+    console.log("Type: " + typeof(results))
+    console.log("Number of msgs for this minute: " + results.length)
 
-  //Reminder.find()
-
-  return [];
-}
+    results.forEach(function(element) {
+      reminders.push(element);
+    });
+  });
+ }
 
 function EmailMessages(messages)
 {
   //send the message for each email.
   messages.forEach(message => {
-    var address = message.address;
-    var subject = message.subject;
-    var body = message.body;
+    var address = "group7seng3080@gmail.com";  //TODO: Use users actual email
+    var subject = message.title;
+    var body = message.message;
+
+    //console.log("Sending email to message: " + message.title)
 
     SendEmail(address, subject, body);
   });
@@ -102,6 +109,8 @@ function SendEmail(address, subject, body)
     }
   });
   
+  console.log("About to send email...")
+
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
       console.log(error);
@@ -118,7 +127,7 @@ function IncrementReocuringDate(message)
   // UpdateMessageTimeInDatabase(message);
   // return;
 
-  if(message.recurring == none)
+  if(!message.recurring)
   {
     return;
   }

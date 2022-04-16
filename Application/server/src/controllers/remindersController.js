@@ -18,6 +18,13 @@ async function getMultiple(req, res, next) {
   
 async function create(req, res, next) {
   try {
+    const {recurring, daily, weekly, monthly, yearly} = req.body;
+
+    // TODO: Fix this bitwise wacky operation (Only one can be true)
+    if(recurring && !(daily ^ weekly ^ monthly ^ yearly)) {
+      throw new Error("There can only be one recurring option")
+    }
+
     const response = await reminderService.create(req.body)
     res.json(response);
   } catch (err) {

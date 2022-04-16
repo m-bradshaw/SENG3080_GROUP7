@@ -7,3 +7,4 @@ cron.schedule('*/1 * * * *', () => {
   console.log("Cron Job Running")
   reminderService.checkForMessages()
 });
+reminderService.checkForMessages()
