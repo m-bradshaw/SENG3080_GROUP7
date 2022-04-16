@@ -92,8 +92,8 @@ class Main extends Component {
             {
               jsonObject.map((value, index) => {
                   return (
-                    <ListGroup.Item key={index}>
-                      <ExistingMessage values={value} key={index} editClickHandler={this.editExistingMessage} deleteClickHandler={this.deleteExistingMessage}>{index}</ExistingMessage>                                                    
+                    <ListGroup.Item key={index} active={((this.state.selectedData) && (value === this.state.selectedData))}>
+                      <ExistingMessage values={value} key={index} editClickHandler={this.editExistingMessage} deleteClickHandler={this.deleteExistingMessage}></ExistingMessage>                                                    
                     </ListGroup.Item>                            
                   );
               })
