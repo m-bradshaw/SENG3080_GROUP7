@@ -4,3 +4,9 @@
     flex: 1; 
     justify-content: center;
 }
+
+.list-group-item.active {
+    background-color: transparent;
+    border-color: blue; 
+    color: black;
+}
