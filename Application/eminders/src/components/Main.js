@@ -57,7 +57,7 @@ class Main extends Component {
   }
 
   triggerAlert(message) {
-    alert(message); 
+    alert(JSON.stringify(message)); 
   }
 
 
@@ -222,7 +222,7 @@ class Main extends Component {
   
         // Call the response handler to set the data in the main component
         console.log(newData); 
-        alert(newData); 
+        this.triggerAlert(newData); 
       }  
     }
 
