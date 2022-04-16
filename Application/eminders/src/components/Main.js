@@ -13,7 +13,7 @@ class Main extends Component {
     
     this.state = {
       dataList: [],
-      formData: DefaultFormData,
+      formData: {...DefaultFormData},
       selectedData: {}
     }
     this.dataSource = "api/v1/reminder";
@@ -224,7 +224,7 @@ class Main extends Component {
     // Validation has been done (set colours)
     this.setState({
         validated: true, 
-        formData: DefaultFormData, 
+        formData: {...DefaultFormData}, 
         selectedData: {}
     });
   };
@@ -236,7 +236,7 @@ class Main extends Component {
         console.log("messageFormReset called in Main");
     }
     this.setState({
-      formData: DefaultFormData, 
+      formData: {...DefaultFormData}, 
       selectedData: {}
     });
     
