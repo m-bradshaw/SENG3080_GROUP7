@@ -1,0 +1,13 @@
+.alignCenter {
+    text-align: center;
+    align-items: center;
+    flex: 1; 
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.list-group-item.active {
+    background-color: transparent;
+    border-color: blue; 
+    color: black;
+}
