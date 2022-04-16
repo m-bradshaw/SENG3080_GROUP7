@@ -12,6 +12,7 @@ class Main extends Component {
     super(props); 
     
     const defaultFormData = {
+      title: "", 
       message: "", 
       date: "", 
       time: "", 
@@ -27,7 +28,7 @@ class Main extends Component {
       formData: defaultFormData,
       selectedData: {}
     }
-    this.dataSource = "api/stub/main";
+    this.dataSource = "api/v1/reminder";
 
     // Ensure component state is bound to changes from the following methods
     this.setExistingRemindersList = this.setExistingRemindersList.bind(this); 
@@ -157,6 +158,11 @@ class Main extends Component {
     return (
       <Form noValidate validated={this.state.validated} onSubmit={this.submitForm} onReset={this.resetForm}>
 
+        <Form.Group className="mb-3" controlId='formTextTitle'>
+          <Form.Label>Title:</Form.Label>
+          <Form.Control as="textarea" rows={1} required placeholder='Enter title here...' defaultValue={this.state.formData.title}></Form.Control>      
+        </Form.Group>
+
         <Form.Group className="mb-3" controlId='formTextMessage'>
           <Form.Label>Message:</Form.Label>
           <Form.Control as="textarea" rows={5} required placeholder='Enter message here...' defaultValue={this.state.formData.message}></Form.Control>      
@@ -210,14 +216,15 @@ class Main extends Component {
 
       if (event.target) {
         var newData = {
-            message: event.target[0].value, 
-            date: event.target[1].value, 
-            time: event.target[2].value, 
-            recurring: event.target[3].checked, 
-            daily: event.target[4].checked, 
-            weekly: event.target[5].checked, 
-            monthly: event.target[6].checked, 
-            yearly: event.target[7].checked                
+            title: event.target[0].value, 
+            message: event.target[1].value, 
+            date: event.target[2].value, 
+            time: event.target[3].value, 
+            recurring: event.target[4].checked, 
+            daily: event.target[5].checked, 
+            weekly: event.target[6].checked, 
+            monthly: event.target[7].checked, 
+            yearly: event.target[8].checked                
         }
   
         // Call the response handler to set the data in the main component
@@ -230,6 +237,7 @@ class Main extends Component {
     this.setState({
         validated: true, 
         formData: {
+          title: "", 
           message: "", 
           date: "", 
           time: "", 
@@ -251,6 +259,7 @@ class Main extends Component {
     }
     this.setState({
       formData: {
+        title: "", 
         message: "", 
         date: "", 
         time: "", 

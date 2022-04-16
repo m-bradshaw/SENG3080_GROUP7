@@ -27,7 +27,7 @@ function ExistingMessage(props) {
                 <p>{props.values.time}</p>
             </Col>
             <Col xs={4} className="alignCenter mx-1">
-                <p>{props.values.message}</p>       
+                <p>{props.values.title}</p>       
             </Col>
 
             <Col xs={1} className="alignCenter mx-1">
