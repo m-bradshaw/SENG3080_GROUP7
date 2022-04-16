@@ -30,10 +30,10 @@ function ExistingMessage(props) {
             </Col>
 
             <Col xs={1} className="alignCenter">
-                {(props.values.daily) ? <p>Daily</p> : null}
-                {(props.values.weekly) ? <p>Weekly</p> : null}
-                {(props.values.monthly) ? <p>Mmonthly</p> : null}
-                {(props.values.yearly) ? <p>Yearly</p> : null}
+                {(props.values.recurring && props.values.daily) ? <p>Daily</p> : null}
+                {(props.values.recurring && props.values.weekly) ? <p>Weekly</p> : null}
+                {(props.values.recurring && props.values.monthly) ? <p>Monthly</p> : null}
+                {(props.values.recurring && props.values.yearly) ? <p>Yearly</p> : null}
             </Col>
 
             <Col xs={2}>
