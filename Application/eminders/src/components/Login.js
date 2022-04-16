@@ -78,6 +78,7 @@ class Login extends Component {
                 <br></br><br></br>
                 {(this.state.formValidated) ? <Navigate to={'../main'}></Navigate> : null}
                 <Container>
+                
                     <Row className='alignCenter'>
                         <Col></Col>
                         <Col xs={8}>
@@ -85,6 +86,7 @@ class Login extends Component {
                         </Col>
                         <Col></Col>                        
                     </Row>
+
                     <Row className='alignCenter'>
                         <Col xs={8}>
                             <Form noValidate validated={this.state.formValidated} onSubmit={this.handleSubmit}>
@@ -100,6 +102,7 @@ class Login extends Component {
                             </Form>
                         </Col>
                     </Row>
+
                     <Row  className='alignCenter'>
                         <Col>
                             <Button>Create Account</Button>
@@ -108,7 +111,8 @@ class Login extends Component {
                         <Col>
                             <Button >Forgot Password</Button>
                         </Col>
-                    </Row>                    
+                    </Row>       
+
                 </Container>
             </div>
         );
