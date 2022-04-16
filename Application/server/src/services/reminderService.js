@@ -46,33 +46,49 @@ function checkForMessages()
 
   var now = new Date();
 
-  var messages = GetMessagesByDate(now).then((err, res) => {
-  });
-
-  //EmailMessages(messages);
-
+  var messages = GetMessagesByDate(now).then((messages, err) => 
+  {
+    //console.log(messages);
+    
+    //EmailMessages(messages);
+    
+    messages.forEach(message =>
+    {
+      IncrementReocuringDate(message);
+    })
+  })
 }
 
 //This function will read from the database.
 //The date parameter will difine the date that is used in the "where" part of the database request.
 async function GetMessagesByDate(date)
 {
-  let reminders = [];
-
   date.setSeconds(0,0)
+
+  // let test = new Reminder({
+  //   title:'test',
+  //   message: 'the message body',
+  //   nextSendDate: new Date(date.getTime())
+  // })
+
+  // test.save();
+
+  // let test2 = new Reminder({
+  //   title:'test2',
+  //   message: 'the message body',
+  //   nextSendDate: new Date(date.getTime() + 60 * 1000)
+  // })
+
+  // test2.save();
+
   //read from the database to get the messages that are correct down to the minute. 
-  Reminder.find({nextSendDate: {
+  const result = await Reminder.find({nextSendDate: {
     $gte: date, 
     $lt: new Date(date.getTime() + 60 * 1000)
-  }}, (err, results) => {
-    console.log("Type: " + typeof(results))
-    console.log("Number of msgs for this minute: " + results.length)
+  }});
 
-    results.forEach(function(element) {
-      reminders.push(element);
-    });
-  });
- }
+  return result.map((r) => r.toObject());
+}
 
 function EmailMessages(messages)
 {
@@ -128,31 +144,32 @@ function IncrementReocuringDate(message)
 
   if(!message.recurring)
   {
+    console.log(message.title + " did not need to incrment");
     return;
   }
 
-  if(message.recurring == hour)
+  console.log(message)
+
+  if(message.daily)
   {
-    message.sendDate.setTime(message.sendDate.getTime() + (60 * 60 * 1000));
+    message.nextSendDate.setDate(message.nextSendDate.getDate() + 1);
   }
-  else if(message.recurring == day)
+  else if(message.weekly)
   {
-    message.sendDate.setDate(message.sendDate.getDate() + 1);
+    message.nextSendDate.setDate(message.nextSendDate.getDate() + 7);
   }
-  else if(message.recurring == week)
+  else if(message.monthly)
   {
-    message.sendDate.setDate(message.sendDate.getDate() + 7);
+    message.nextSendDate = AddMonth(message.nextSendDate)
   }
-  else if(message.recurring == month)
+  else if(message.yearly)
   {
-    message.sendDate = AddMonth(message.sendDate)
-  }
-  else if(message.recurring == year)
-  {
-    message.sendDate.setFullYear(message.sendDate.getFullYear() + 1);
+    message.nextSendDate.setFullYear(message.nextSendDate.getFullYear() + 1);
   }
 
-  UpdateMessageTimeInDatabase(message);
+  console.log(message)
+
+  //UpdateMessageTimeInDatabase(message);
 }
 
 //Add 1 month to a date
@@ -160,14 +177,14 @@ function AddMonth(startDate)
 {
   var original = startDate.getDate();
 
-  date.setMonth(startDate.getMonth() + 1);
+  startDate.setMonth(startDate.getMonth() + 1);
 
   if (startDate.getDate() != original) 
   {
     startDate.setDate(0);
   }
 
-  return date;
+  return startDate;
 }
 
 function UpdateMessageTimeInDatabase(message)
