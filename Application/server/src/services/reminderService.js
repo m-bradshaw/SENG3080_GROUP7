@@ -1,6 +1,7 @@
 const Reminder = require("../models/reminder")
 const nodemailer = require('nodemailer')
 const res = require("express/lib/response")
+const reminder = require("../models/reminder")
 
 
 async function get(id){
@@ -46,32 +47,49 @@ function checkForMessages()
 
   var now = new Date();
 
-  var messages = GetMessagesByDate(now).then((messages, err) => 
+  var messages = GetMessagesByDate(now, true).then((messages, err) => 
   {
-    //console.log(messages);
+    console.log('original messages');
+    console.log(messages);
     
     //EmailMessages(messages);
     
-    messages.forEach(message =>
-    {
-      IncrementReocuringDate(message);
-    })
+    IncrementReocuringDate(messages)
+    
+    now.setDate(now.getDate() + 1)
+
+      console.log(now)
+  
+      GetMessagesByDate(now, false).then((messages2, err) => 
+      {
+        console.log('new messages')
+        console.log(messages2)
+      })
+
   })
+
+  
 }
 
 //This function will read from the database.
 //The date parameter will difine the date that is used in the "where" part of the database request.
-async function GetMessagesByDate(date)
+async function GetMessagesByDate(date, createTest)
 {
+
   date.setSeconds(0,0)
 
-  // let test = new Reminder({
-  //   title:'test',
-  //   message: 'the message body',
-  //   nextSendDate: new Date(date.getTime())
-  // })
-
-  // test.save();
+  if(createTest)
+  {
+    let test = new Reminder({
+      title: Math.random().toString(),
+      message: 'the message body',
+      nextSendDate: new Date(date.getTime()),
+      recurring: true,
+      daily: true
+    })
+  
+    test.save();
+  }
 
   // let test2 = new Reminder({
   //   title:'test2',
@@ -135,41 +153,40 @@ function SendEmail(address, subject, body)
   });
 }
 
-function IncrementReocuringDate(message)
+function IncrementReocuringDate(messages)
 {
-  //// testing, move the date ahead by 1 minute
-  // message.sendDate = new Date(message.sendDate.getTime() + 60000);
-  // UpdateMessageTimeInDatabase(message);
-  // return;
-
-  if(!message.recurring)
+  messages.forEach(message => 
   {
-    console.log(message.title + " did not need to incrment");
-    return;
-  }
+    //// testing, move the date ahead by 1 minute
+    // message.sendDate = new Date(message.sendDate.getTime() + 60000);
+    // UpdateMessageTimeInDatabase(message);
+    // return;
 
-  console.log(message)
+    if(!message.recurring)
+    {
+      console.log(message.title + " did not need to incrment");
+      return;
+    }
 
-  if(message.daily)
-  {
-    message.nextSendDate.setDate(message.nextSendDate.getDate() + 1);
-  }
-  else if(message.weekly)
-  {
-    message.nextSendDate.setDate(message.nextSendDate.getDate() + 7);
-  }
-  else if(message.monthly)
-  {
-    message.nextSendDate = AddMonth(message.nextSendDate)
-  }
-  else if(message.yearly)
-  {
-    message.nextSendDate.setFullYear(message.nextSendDate.getFullYear() + 1);
-  }
+    if(message.daily)
+    {
+      message.nextSendDate.setDate(message.nextSendDate.getDate() + 1);
+    }
+    else if(message.weekly)
+    {
+      message.nextSendDate.setDate(message.nextSendDate.getDate() + 7);
+    }
+    else if(message.monthly)
+    {
+      message.nextSendDate = AddMonth(message.nextSendDate)
+    }
+    else if(message.yearly)
+    {
+      message.nextSendDate.setFullYear(message.nextSendDate.getFullYear() + 1);
+    }
 
-  console.log(message)
-
-  //UpdateMessageTimeInDatabase(message);
+    UpdateMessageTimeInDatabase(message);
+  })
 }
 
 //Add 1 month to a date
@@ -189,7 +206,20 @@ function AddMonth(startDate)
 
 function UpdateMessageTimeInDatabase(message)
 {
-  //push the message to the database. It should already be in there, but the time has been changed.
+  //console.log(message._id.toString())
+
+  try {
+
+    result = Reminder.updateOne(
+      { "_id" : message._id },
+      { $set: { "nextSendDate" : message.nextSendDate } }
+    );
+
+    //console.log(result)
+
+  } catch (e) {
+    console.log('ERROR!!!!!! ' + e)
+  }
 }
 
 module.exports = {
