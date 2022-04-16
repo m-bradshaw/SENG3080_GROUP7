@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
-import RequestJsonData from './HandleData';
+import {RequestJsonData} from './RequestHandlers';
 import { NavLink} from 'react-router-dom';
 import '../css/layout.css';
 import {Button, Container, Row, Col, Stack, ListGroup, Form} from 'react-bootstrap';
 import ExistingMessage from './ExistingMessage';
+
+const defaultFormData = {
+  title: "", 
+  message: "", 
+  date: "", 
+  time: "", 
+  recurring: false, 
+  daily: false, 
+  weekly: false, 
+  monthly: false, 
+  yearly: false
+}
 
 class Main extends Component {
 

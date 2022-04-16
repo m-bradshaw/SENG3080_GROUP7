@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
-import GetData from './HandleData';
+import {RequestJsonData} from './RequestHandlers';
 import '../css/layout.css';
 
 import {Button, Container, Form, Row, Col} from 'react-bootstrap';
@@ -18,11 +18,11 @@ class Login extends Component {
 
     // Fetch the list on first mount
     componentDidMount() {
-        GetData(this.dataSource, this.setData);
+        RequestJsonData(this.dataSource, this.setData);
     }
 
     compoenentDidUpdate() {
-        GetData(this.dataSource, this.setData); 
+        RequestJsonData(this.dataSource, this.setData); 
     }
 
     setData = (json) => {
