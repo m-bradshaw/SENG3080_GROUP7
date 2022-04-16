@@ -3,6 +3,7 @@
     align-items: center;
     flex: 1; 
     justify-content: center;
+    vertical-align: middle;
 }
 
 .list-group-item.active {

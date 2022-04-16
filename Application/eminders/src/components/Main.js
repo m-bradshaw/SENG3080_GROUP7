@@ -64,9 +64,9 @@ class Main extends Component {
 
   logOutButton = () => {
     return (
-      <Container className='m-3'>
+      <Container className='mt-3'>
         <NavLink to={'../login'}>
-          <Button>Log Out</Button>
+          <Button variant='outline-dark'><i class="bi bi-door-closed-fill"></i> Log Out</Button>
         </NavLink>  
       </Container>
     )
@@ -88,7 +88,7 @@ class Main extends Component {
     if (show) {
       return (
         <Container className="alignCenter">
-          <ListGroup variant="flush">
+          <ListGroup className="md-2">
             {
               jsonObject.map((value, index) => {
                   return (
@@ -114,6 +114,9 @@ class Main extends Component {
     var msg = "Existing message delete clicked";
     console.log(msg);    
     console.log(data); 
+    this.setState({
+      selectedData: data.values
+    });
     this.triggerAlert(msg); 
   }
 
@@ -185,8 +188,8 @@ class Main extends Component {
         </Stack>
 
         <Stack direction="horizontal" gap={3} className='alignCenter'>
-          <Button variant='primary' type='submit'>Submit</Button>  
-          <Button variant='primary' type='reset' value="Reset">Reset</Button>  
+          <Button variant='outline-success' type='submit'>Submit</Button>  
+          <Button variant='outline-danger' type='reset' value="Reset">Reset</Button>  
         </Stack>
 
       </Form> 
@@ -271,24 +274,24 @@ class Main extends Component {
 
         {this.logOutButton()}
 
-        <Container className='flex'>
-          <div className='m-2'>
-            <Stack gap={4} className="mx-auto">
+        <Container className='mx-auto m-5'>          
+            <Stack gap={4}>
 
               <h1 className='alignCenter'>Welcome!</h1>
 
               <h4>Create/Edit Reminder:</h4> 
               
-              {this.mainForm()}
+              <div>
+                {this.mainForm()}
+              </div>
 
-              <h4>My Reminders:</h4> 
+              <h4 className='mt-5'>My Reminders:</h4> 
 
               <div>
                 { this.mapExistingMessages(this.state.dataList.length >= 1) }    
               </div>
 
-            </Stack>
-          </div>           
+            </Stack>      
         </Container>
 
       </div>
