@@ -10,19 +10,22 @@ class Main extends Component {
   // Initialize the state
   constructor(props){      
     super(props); 
+    
+    const defaultFormData = {
+      message: "", 
+      date: "", 
+      time: "", 
+      recurring: false, 
+      daily: false, 
+      weekly: false, 
+      monthly: false, 
+      yearly: false  
+    }
 
     this.state = {
       dataList: [],
-      currentData: {
-        message: "", 
-        date: "", 
-        time: "", 
-        recurring: false, 
-        daily: false, 
-        weekly: false, 
-        monthly: false, 
-        yearly: false                
-      }
+      formData: defaultFormData,
+      selectedData: {}
     }
     this.dataSource = "api/stub/main";
 
@@ -32,6 +35,7 @@ class Main extends Component {
     this.deleteExistingMessage = this.deleteExistingMessage.bind(this); 
     this.editExistingMessage = this.editExistingMessage.bind(this); 
     this.submitForm = this.submitForm.bind(this); 
+
   }
   
   // Fetch the list on first mount
@@ -48,8 +52,8 @@ class Main extends Component {
   logState() {
     console.log("dataList:");
     console.log(this.state.dataList); 
-    console.log("currentData:");
-    console.log(this.state.currentData);
+    console.log("formData:");
+    console.log(this.state.formData);
   }
 
   triggerAlert(message) {
@@ -80,7 +84,7 @@ class Main extends Component {
 
   // Map the incoming server data to a list of ExistingMessage components
   mapExistingMessages = (show) => {
-    const jsonObject = this.state.dataList;
+    const jsonObject = [...this.state.dataList];
     if (show) {
       return (
         <Container className="alignCenter">
@@ -116,8 +120,10 @@ class Main extends Component {
   // Button handler for editing an existing message. 
   // In here we want to be able to fill in the fields of the create/edit area (and reload it) with the values from the existing message. 
   editExistingMessage = (data) => {
+    var dataCopy = {...data.values}; 
     this.setState({
-      currentData: data.values
+      formData: dataCopy, 
+      selectedData: data.values
     });
   }
 
@@ -125,22 +131,22 @@ class Main extends Component {
   radioCheckUpdated = (event) => {
     console.log("radioCheckUpdated called!")
 
-    var current = this.state.currentData; 
+    var current = this.state.formData; 
     current.daily = event.target.id === "Daily";
     current.weekly = event.target.id === "Weekly";
     current.monthly = event.target.id === "Monthly";
     current.yearly = event.target.id === "Yearly";
 
-    this.setState({currentData : current})
+    this.setState({formData : current})
   }
   
   recurringCheckUpdated = (event) => {
     console.log("recurringCheckUpdated called!")
 
-    var current = this.state.currentData; 
+    var current = this.state.formData; 
     current.recurring = event.target.checked;
     
-    this.setState({currentData : current})
+    this.setState({formData : current})
   }
 
   
@@ -150,30 +156,30 @@ class Main extends Component {
 
         <Form.Group className="mb-3" controlId='formTextMessage'>
           <Form.Label>Message:</Form.Label>
-          <Form.Control as="textarea" rows={5} required placeholder='Enter message here...' defaultValue={this.state.currentData.message}></Form.Control>      
+          <Form.Control as="textarea" rows={5} required placeholder='Enter message here...' defaultValue={this.state.formData.message}></Form.Control>      
         </Form.Group>        
 
         <Form.Group className="mb-3" controlId='formDate'>
           <Form.Label>Date:</Form.Label>
-          <Form.Control type="date" required defaultValue={this.state.currentData.date}></Form.Control>           
+          <Form.Control type="date" required defaultValue={this.state.formData.date}></Form.Control>           
         </Form.Group>       
 
         <Form.Group className="mb-3" controlId='formTime'> 
           <Form.Label>Time:</Form.Label>
-          <Form.Control type="time" required defaultValue={this.state.currentData.time}></Form.Control>      
+          <Form.Control type="time" required defaultValue={this.state.formData.time}></Form.Control>      
         </Form.Group>
 
         <Stack direction="horizontal" gap={3} className="alignCenter">
 
           <Form.Group className="mb-3" controlId="formRecurringCheckbox" >
-            <Form.Check type="checkbox" label="Recurring" checked={this.state.currentData.recurring} onChange={this.recurringCheckUpdated}/>
+            <Form.Check type="checkbox" label="Recurring" checked={this.state.formData.recurring} onChange={this.recurringCheckUpdated}/>
           </Form.Group>  
 
           <Form.Group className="mb-3" controlId="formTimeRadios">
-            <Form.Check inline type="radio" name="timeGroup" label="Daily" id="Daily" disabled={!this.state.currentData.recurring} checked={this.state.currentData.daily} onChange={this.radioCheckUpdated} />
-            <Form.Check inline type="radio" name="timeGroup" label="Weekly" id="Weekly" disabled={!this.state.currentData.recurring} checked={this.state.currentData.weekly} onChange={this.radioCheckUpdated} />
-            <Form.Check inline type="radio" name="timeGroup" label="Monthly" id="Monthly" disabled={!this.state.currentData.recurring} checked={this.state.currentData.monthly} onChange={this.radioCheckUpdated} />
-            <Form.Check inline type="radio" name="timeGroup" label="Yearly" id="Yearly" disabled={!this.state.currentData.recurring} checked={this.state.currentData.yearly} onChange={this.radioCheckUpdated} />
+            <Form.Check inline type="radio" name="timeGroup" label="Daily" id="Daily" disabled={!this.state.formData.recurring} checked={this.state.formData.daily} onChange={this.radioCheckUpdated} />
+            <Form.Check inline type="radio" name="timeGroup" label="Weekly" id="Weekly" disabled={!this.state.formData.recurring} checked={this.state.formData.weekly} onChange={this.radioCheckUpdated} />
+            <Form.Check inline type="radio" name="timeGroup" label="Monthly" id="Monthly" disabled={!this.state.formData.recurring} checked={this.state.formData.monthly} onChange={this.radioCheckUpdated} />
+            <Form.Check inline type="radio" name="timeGroup" label="Yearly" id="Yearly" disabled={!this.state.formData.recurring} checked={this.state.formData.yearly} onChange={this.radioCheckUpdated} />
           </Form.Group> 
     
         </Stack>
@@ -220,7 +226,7 @@ class Main extends Component {
     // Validation has been done (set colours)
     this.setState({
         validated: true, 
-        currentData: {
+        formData: {
           message: "", 
           date: "", 
           time: "", 
@@ -229,7 +235,8 @@ class Main extends Component {
           weekly: false, 
           monthly: false, 
           yearly: false                
-        }
+        }, 
+        selectedData: {}
     });
   };
 
@@ -240,7 +247,7 @@ class Main extends Component {
         console.log("messageFormReset called in Main");
     }
     this.setState({
-      currentData: {
+      formData: {
         message: "", 
         date: "", 
         time: "", 
@@ -249,7 +256,8 @@ class Main extends Component {
         weekly: false, 
         monthly: false, 
         yearly: false                
-      }
+      }, 
+      selectedData: {}
     });
     
   }
