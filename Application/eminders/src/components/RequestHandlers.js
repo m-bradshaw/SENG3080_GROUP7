@@ -19,5 +19,16 @@ module.exports = {
     }, 
     PostData : function () {
 
+    },
+    DefaultFormData : {
+        title: "", 
+        message: "", 
+        date: "", 
+        time: "", 
+        recurring: false, 
+        daily: false, 
+        weekly: false, 
+        monthly: false, 
+        yearly: false
     }
 }

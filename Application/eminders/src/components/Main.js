@@ -1,21 +1,9 @@
 import React, { Component } from 'react';
-import {RequestJsonData} from './RequestHandlers';
+import {RequestJsonData, DefaultFormData} from './RequestHandlers';
 import { NavLink} from 'react-router-dom';
 import '../css/layout.css';
 import {Button, Container, Row, Col, Stack, ListGroup, Form} from 'react-bootstrap';
 import ExistingMessage from './ExistingMessage';
-
-const defaultFormData = {
-  title: "", 
-  message: "", 
-  date: "", 
-  time: "", 
-  recurring: false, 
-  daily: false, 
-  weekly: false, 
-  monthly: false, 
-  yearly: false
-}
 
 class Main extends Component {
 
@@ -23,21 +11,9 @@ class Main extends Component {
   constructor(props){      
     super(props); 
     
-    const defaultFormData = {
-      title: "", 
-      message: "", 
-      date: "", 
-      time: "", 
-      recurring: false, 
-      daily: false, 
-      weekly: false, 
-      monthly: false, 
-      yearly: false  
-    }
-
     this.state = {
       dataList: [],
-      formData: defaultFormData,
+      formData: DefaultFormData,
       selectedData: {}
     }
     this.dataSource = "api/v1/reminder";
@@ -248,17 +224,7 @@ class Main extends Component {
     // Validation has been done (set colours)
     this.setState({
         validated: true, 
-        formData: {
-          title: "", 
-          message: "", 
-          date: "", 
-          time: "", 
-          recurring: false, 
-          daily: false, 
-          weekly: false, 
-          monthly: false, 
-          yearly: false                
-        }, 
+        formData: DefaultFormData, 
         selectedData: {}
     });
   };
@@ -270,17 +236,7 @@ class Main extends Component {
         console.log("messageFormReset called in Main");
     }
     this.setState({
-      formData: {
-        title: "", 
-        message: "", 
-        date: "", 
-        time: "", 
-        recurring: false, 
-        daily: false, 
-        weekly: false, 
-        monthly: false, 
-        yearly: false                
-      }, 
+      formData: DefaultFormData, 
       selectedData: {}
     });
     
