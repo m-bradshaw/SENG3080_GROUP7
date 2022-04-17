@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const userCtrl = require('../controllers/userController');
+const authCtrl = require('../controllers/authController');
 
-// Login existing User
-router.get('/login', userCtrl.login);
+// Login Google User
+router.get('/google', authCtrl.login);
 
-// Create / Register a new User
-router.post("/register", userCtrl.register);
+// Callback
+router.get('/google/callback', authCtrl.callback)
+
+
 
 module.exports = router;

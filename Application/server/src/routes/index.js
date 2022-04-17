@@ -6,6 +6,6 @@ const auth = require('./authRoutes');
 const router = express.Router();
 
 router.use("/reminder", reminder);
-router.use("/", auth);
+router.use("/auth", auth);
 
 module.exports = router;

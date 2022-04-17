@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import GetData from './HandleData';
 import '../css/layout.css';
+import googleLogo from '../assets/googleLogo.png';
 
 import {Button, Container, Form, Row, Col} from 'react-bootstrap';
 
@@ -31,6 +32,10 @@ class Login extends Component {
             console.log(json);
             this.setState({dataList: json.message});
         }
+    }
+
+    googleLogin = () => {
+        window.open("http://localhost:3001/api/v1/reminder", "_self");
     }
 
     handleSubmit = (event) => {
@@ -89,6 +94,9 @@ class Login extends Component {
 
                     <Row className='alignCenter'>
                         <Col xs={8}>
+                            <div className="mb-3">
+                                <button onClick={this.googleLogin}>Login with Google</button>
+                            </div>
                             <Form noValidate validated={this.state.formValidated} onSubmit={this.handleSubmit}>
                                 <Form.Group className="mb-3" controlId='formUsername'>
                                     <Form.Label>Username:</Form.Label>

@@ -8,7 +8,7 @@ async function get(id){
 }
 
 async function getMultiple(){
-    console.log("getMultiple")
+    console.log("TESTING TESTING")
     GetMessagesByDate(new Date())
 }
 
