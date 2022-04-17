@@ -58,14 +58,14 @@ function checkForMessages()
     
     now.setDate(now.getDate() + 1)
 
-      console.log(now)
-  
+    UpdateMessageTimeInDatabase(messages).then((err) =>
+    {
       GetMessagesByDate(now, false).then((messages2, err) => 
       {
         console.log('new messages')
         console.log(messages2)
       })
-
+    })
   })
 
   
@@ -185,7 +185,6 @@ function IncrementReocuringDate(messages)
       message.nextSendDate.setFullYear(message.nextSendDate.getFullYear() + 1);
     }
 
-    UpdateMessageTimeInDatabase(message);
   })
 }
 
@@ -204,22 +203,29 @@ function AddMonth(startDate)
   return startDate;
 }
 
-function UpdateMessageTimeInDatabase(message)
+async function UpdateMessageTimeInDatabase(messages)
 {
   //console.log(message._id.toString())
 
-  try {
+  messages.forEach(async message => {
+    
+    try {
+      
+      await Reminder.updateOne(
+        { "_id" : message._id },
+        { $set: { "nextSendDate" : message.nextSendDate } }
+      );
 
-    result = Reminder.updateOne(
-      { "_id" : message._id },
-      { $set: { "nextSendDate" : message.nextSendDate } }
-    );
+      //console.log(message);
 
-    //console.log(result)
-
-  } catch (e) {
-    console.log('ERROR!!!!!! ' + e)
-  }
+      let result = await Reminder.findOne({ "_id" : message._id });
+  
+      console.log('read from database\n' + result)
+  
+    } catch (e) {
+      console.log('ERROR!!!!!! ' + e)
+    }
+  })
 }
 
 module.exports = {
