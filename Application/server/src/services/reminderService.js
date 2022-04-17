@@ -47,51 +47,34 @@ function checkForMessages()
 
   var now = new Date();
 
-  console.log(now);
-
-  var messages = GetMessagesByDate(now, true).then((messages, err) => 
+  //get all the messages for this minute
+  GetMessagesByDate(now, true).then((messages, err) => 
   {
-    console.log('original messages');
-    console.log(messages);
-    
+    //email all the messages
     //EmailMessages(messages);
     
+    //increment the date in all of the objects
     IncrementReocuringDate(messages)
-    
-    now.setDate(now.getDate() + 1)
 
-    UpdateMessageTimeInDatabase(messages).then((err) =>
-    {
-      GetMessagesByDate(now, false).then((messages2, err) => 
-      {
-        console.log('new messages')
-        console.log(messages2)
-      })
-    })
+    //update the database with the updated dates.
+    //this method is async, but it doesn't really matter in this case
+    UpdateMessageTimeInDatabase(messages)
   })
 }
 
 //This function will read from the database.
 //The date parameter will difine the date that is used in the "where" part of the database request.
-async function GetMessagesByDate(date, createTest)
+async function GetMessagesByDate(date)
 {
+  // let test = new Reminder({
+  //   title: Math.random().toString(),
+  //   message: 'the message body',
+  //   nextSendDate: new Date(date.getTime()),
+  //   recurring: true,
+  //   daily: true
+  // })
 
-  date.setSeconds(0,0)
-
-  console.log(date)
-
-  if(createTest)
-  {
-    let test = new Reminder({
-      title: Math.random().toString(),
-      message: 'the message body',
-      nextSendDate: new Date(date.getTime()),
-      recurring: true,
-      daily: true
-    })
-  
-    test.save();
-  }
+  // test.save();
 
   // let test2 = new Reminder({
   //   title:'test2',
@@ -100,6 +83,8 @@ async function GetMessagesByDate(date, createTest)
   // })
 
   // test2.save();
+
+  date.setSeconds(0,0)
 
   //read from the database to get the messages that are correct down to the minute. 
   const result = await Reminder.find({nextSendDate: {
@@ -117,8 +102,6 @@ function EmailMessages(messages)
     var address = "group7seng3080@gmail.com";  //TODO: Use users actual email
     var subject = message.title;
     var body = message.message;
-
-    //console.log("Sending email to message: " + message.title)
 
     SendEmail(address, subject, body);
   });
@@ -186,7 +169,6 @@ function IncrementReocuringDate(messages)
     {
       message.nextSendDate.setFullYear(message.nextSendDate.getFullYear() + 1);
     }
-
   })
 }
 
@@ -207,9 +189,6 @@ function AddMonth(startDate)
 
 async function UpdateMessageTimeInDatabase(messages)
 {
-  //console.log(message._id.toString())
-  //console.log(messages.length)
-
   for(let i = 0; i < messages.length; i++)
   {
     let message = messages[i]
@@ -220,19 +199,11 @@ async function UpdateMessageTimeInDatabase(messages)
         { "_id" : message._id },
         { $set: { "nextSendDate" : message.nextSendDate } }
       );
-
-      //console.log(message);message
-
-      // let result = await Reminder.findOne({ "_id" : message._id });
-  
-      // console.log('read from database\n' + result)
   
     } catch (e) {
       console.log('ERROR!!!!!! ' + e)
     }
   }
-
-  console.log('end of UpdateMessageTimeInDatabase')
 }
 
 module.exports = {
