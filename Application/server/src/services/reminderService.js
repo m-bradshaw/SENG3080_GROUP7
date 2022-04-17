@@ -47,6 +47,8 @@ function checkForMessages()
 
   var now = new Date();
 
+  console.log(now);
+
   var messages = GetMessagesByDate(now, true).then((messages, err) => 
   {
     console.log('original messages');
@@ -67,8 +69,6 @@ function checkForMessages()
       })
     })
   })
-
-  
 }
 
 //This function will read from the database.
@@ -77,6 +77,8 @@ async function GetMessagesByDate(date, createTest)
 {
 
   date.setSeconds(0,0)
+
+  console.log(date)
 
   if(createTest)
   {
@@ -206,9 +208,12 @@ function AddMonth(startDate)
 async function UpdateMessageTimeInDatabase(messages)
 {
   //console.log(message._id.toString())
+  //console.log(messages.length)
 
-  messages.forEach(async message => {
-    
+  for(let i = 0; i < messages.length; i++)
+  {
+    let message = messages[i]
+
     try {
       
       await Reminder.updateOne(
@@ -216,16 +221,18 @@ async function UpdateMessageTimeInDatabase(messages)
         { $set: { "nextSendDate" : message.nextSendDate } }
       );
 
-      //console.log(message);
+      //console.log(message);message
 
-      let result = await Reminder.findOne({ "_id" : message._id });
+      // let result = await Reminder.findOne({ "_id" : message._id });
   
-      console.log('read from database\n' + result)
+      // console.log('read from database\n' + result)
   
     } catch (e) {
       console.log('ERROR!!!!!! ' + e)
     }
-  })
+  }
+
+  console.log('end of UpdateMessageTimeInDatabase')
 }
 
 module.exports = {
