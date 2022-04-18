@@ -12,7 +12,7 @@ import Context from './components/Context';
 render((
   <BrowserRouter>
     <React.StrictMode>
-      <Context>
+      <Context dataSource="/api/v1/auth/getUser">
         <AppComponent />
       </Context>
     </React.StrictMode>

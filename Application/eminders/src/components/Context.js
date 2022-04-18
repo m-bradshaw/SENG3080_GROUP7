@@ -7,11 +7,11 @@ export default function Context(props) {
     const [userObject, setUserObject] = useState();
 
     useEffect(() => {
-        var dataSource = "/api/v1/auth/getUser";
+        var dataSource = props.dataSource;
         var requestInit = {credentials: 'include'};
         var dataHandlerMethod = setUserObject;
         return GetData(dataSource, dataHandlerMethod, requestInit);
-    }, []);
+    }, [props]);
     
     return (        
         <myContext.Provider value={userObject}>{props.children}</myContext.Provider>
