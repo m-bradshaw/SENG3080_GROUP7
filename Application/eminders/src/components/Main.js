@@ -219,7 +219,7 @@ class Main extends Component {
             title: event.target[0].value, 
             message: event.target[1].value, 
             date: event.target[2].value, 
-            time: event.target[3].value, 
+            //time: event.target[3].value, 
             recurring: event.target[4].checked, 
             daily: event.target[5].checked, 
             weekly: event.target[6].checked, 
@@ -229,7 +229,37 @@ class Main extends Component {
   
         // Call the response handler to set the data in the main component
         console.log(newData); 
+
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newData),
+          credentials: 'include'
+        };
+
+        fetch("/api/v1/reminder", requestOptions)
+        .then(res => {
+            if (res.status !== 200) {
+                console.error("Response status: " + res.status.toString()); 
+            }
+            else {
+                return res.json();
+            }
+        }).then(jsonData => {
+            if (jsonData) {
+                console.log("Context Success:");
+                console.log(jsonData);
+            }
+        }).catch((error) => {
+            console.log("Error:")
+            console.log(error); 
+        })
+
         this.triggerAlert(newData); 
+
+
+
+
       }  
     }
 

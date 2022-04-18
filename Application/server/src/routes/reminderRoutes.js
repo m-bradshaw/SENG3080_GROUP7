@@ -12,7 +12,7 @@ router.get('/:id', reminderCtrl.get);
 router.post('/', reminderCtrl.create);
 
 // Update an existing reminder
-router.put('/:id', reminderCtrl.update);
+router.patch('/:id', reminderCtrl.update);
 
 // Delete a specific reminder
 router.delete('/:id', reminderCtrl.remove);

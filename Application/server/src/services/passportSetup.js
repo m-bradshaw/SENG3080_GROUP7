@@ -20,21 +20,15 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     // Create or get user from the database
-    console.log("profile:"); 
-    console.log(profile); 
     User.findOne({googleID: profile.id}, async (err, doc) => {
     
       if(err) {
-        console.log("err:"); 
-        console.log(err); 
+        console.log("Error: " + err); 
         return cb(err, null);
       }
-      
-      console.log("doc:");
-      console.log(doc);
 
+      let userDoc = null;
       if(!doc) {
-
         // Create new user
         const user = new User({
           googleID: profile.id,
@@ -42,16 +36,15 @@ passport.use(new GoogleStrategy({
         })
         await user.save((err, newUser) => {
           if(!err) {
-            return cb(null, newUser);
+            userDoc = newUser;
           }
           else {
-            console.log("err:");
-            console.log(err);
+            console.log("Error: " + err);
           }
         });
-
       }
-      return cb(null, doc);
+      cb(null, userDoc);
     })
+    
   }
 ));
