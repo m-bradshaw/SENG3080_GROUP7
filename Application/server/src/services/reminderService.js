@@ -8,7 +8,7 @@ async function get(id){
 }
 
 async function getMultiple(){
-    console.log("TESTING TESTING")
+    console.log("getMultiple")
     GetMessagesByDate(new Date())
 }
 
@@ -47,7 +47,6 @@ function checkForMessages()
   var now = new Date();
 
   var messages = GetMessagesByDate(now).then((err, res) => {
-    console.log("This is " + res);
   });
 
   //EmailMessages(messages);

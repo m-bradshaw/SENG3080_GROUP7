@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(helmet());
-app.use(cors({origin: "http://localhost:3001", credentials: true}));
+app.use(cors({origin: "http://localhost:3000", credentials: true}));
 
 // Passport settings
 app.use(
@@ -39,6 +39,7 @@ app.use(middleware.errorHandler);
 mongoose.connect(process.env.DB_SOURCE, {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('open', () => console.log('Connected to MongoDB'));
+
 
 // Start the server
 const PORT = process.env.PORT || 3001;
