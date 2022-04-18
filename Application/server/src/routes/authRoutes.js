@@ -7,9 +7,9 @@ const passport = require('passport');
 router.get('/google', passport.authenticate('google'));
 
 // Callback
-router.get('/google/redirect', passport.authenticate('google', { failureRedirect: '/login' }),
+router.get('/google/redirect', passport.authenticate('google', { failureRedirect: 'http://localhost:3000/' }),
 function(req, res) {
-  res.redirect('http://localhost:3000');
+  res.redirect('http://localhost:3000/main');
 });
 
 // Retrieve data from the logged in user
