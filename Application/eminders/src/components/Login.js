@@ -19,11 +19,11 @@ class Login extends Component {
 
     // Fetch the list on first mount
     componentDidMount() {
-        GetData(this.dataSource, this.setData);
+        //GetData(this.dataSource, this.setData);
     }
 
     compoenentDidUpdate() {
-        GetData(this.dataSource, this.setData); 
+        //GetData(this.dataSource, this.setData); 
     }
 
     setData = (json) => {
@@ -35,7 +35,7 @@ class Login extends Component {
     }
 
     googleLogin = () => {
-        window.open("http://localhost:3001/api/v1/reminder", "_self");
+        window.open("http://localhost:3001/api/v1/auth/google", "_self");
     }
 
     handleSubmit = (event) => {

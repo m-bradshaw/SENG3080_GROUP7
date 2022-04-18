@@ -4,10 +4,12 @@ import Login from './Login';
 import Main from './Main';
 import AOS from 'aos';
 import { isMobile } from 'react-device-detect';
+import {myContext} from './Context';
 
 import '../css/App.css';
 
 class AppComponent extends Component {
+  static contextType = myContext;
   componentDidMount() {
     setTimeout(() => {
       AOS.init({
@@ -16,8 +18,11 @@ class AppComponent extends Component {
       AOS.refresh();
     }, 1500);
   }
-
+  
   render() {
+    let value = this.context;
+    console.log(value);
+
     return (
       // <Router hashType="noslash" basename={process.env.BASE_PATH}>
         <div>

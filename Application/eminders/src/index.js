@@ -7,11 +7,14 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import AppComponent from './components/AppComponent';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import Context from './components/Context';
 
 render((
   <BrowserRouter>
     <React.StrictMode>
-      <AppComponent />
+      <Context>
+        <AppComponent />
+      </Context>
     </React.StrictMode>
   </BrowserRouter>  
 ), document.getElementById('root'));
