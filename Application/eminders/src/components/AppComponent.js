@@ -29,7 +29,7 @@ class AppComponent extends Component {
         <Routes>
           <Route path='/' element={<Login/>}></Route>
           <Route path='/Login' element={<Login/>}></Route>
-          <Route path='/Main' element={<Main/>}></Route>
+          <Route path='/Main' element={<Main user={value}/>}></Route>
         </Routes>
       </div>
       // </Router>
