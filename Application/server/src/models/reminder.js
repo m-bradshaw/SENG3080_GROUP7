@@ -28,6 +28,7 @@ const reminderSchema = new mongoose.Schema({
         maxlength: [2000, "reminder 'body' is too long!"]
     },
     ownerID: {type: Schema.Types.ObjectId, ref: 'User'},
+    email: {type: String, required: true},
     nextSendDate: {
         type: Date, 
         default: Date.now

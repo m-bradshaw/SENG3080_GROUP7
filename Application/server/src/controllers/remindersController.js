@@ -43,16 +43,12 @@ async function update(req, res, next) {
   try {
     //checkAuthentication(req, res);
     
-    //const {recurring, daily, weekly, monthly, yearly} = req.body;
+    const {recurring, daily, weekly, monthly, yearly} = req.body;
 
-    // TODO: Fix this bitwise wacky operation (Only one can be true)
-    /**
-     * 
-     if(recurring && !(daily ^ weekly ^ monthly ^ yearly)) {
-       throw new Error("There can only be one recurring option")
-      }
+    if(recurring && !(daily ^ weekly ^ monthly ^ yearly)) {
+      throw new Error("There can only be one recurring option")
+    }
       
-      */
    res.json(await reminderService.update(req.params.id, req.body));
   } catch (err) {
     next(err);

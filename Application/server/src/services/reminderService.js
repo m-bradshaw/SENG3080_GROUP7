@@ -8,8 +8,7 @@ async function get(id){
 }
 
 async function getMultiple(user){
-    const reminders = await Reminder.find({'ownerID': "625dbfa1c053a69a2198272b"});
-    GetMessagesByDate(new Date());
+    const reminders = await Reminder.find({'ownerID': user._id});
     return reminders;
 }
 
@@ -18,7 +17,8 @@ async function create(body, user) {
       title: body.title,
       message: body.body,
       ownerID: user._id,
-      nextSendDate: new Date(new Date() + 1 * 60 * 1000), // Change in the frontend to concat (date + time)
+      email: user.email,
+      nextSendDate: body.nextSendDate,
       recurring: body.recurring,
       daily: body.daily,
       weekly: body.weekly,
@@ -72,24 +72,6 @@ function checkForMessages()
 //The date parameter will difine the date that is used in the "where" part of the database request.
 async function GetMessagesByDate(date)
 {
-  // let test = new Reminder({
-  //   title: Math.random().toString(),
-  //   message: 'the message body',
-  //   nextSendDate: new Date(date.getTime()),
-  //   recurring: true,
-  //   daily: true
-  // })
-
-  // test.save();
-
-  // let test2 = new Reminder({
-  //   title:'test2',
-  //   message: 'the message body',
-  //   nextSendDate: new Date(date.getTime() + 60 * 1000)
-  // })
-
-  // test2.save();
-
   date.setSeconds(0,0)
 
   //read from the database to get the messages that are correct down to the minute. 
@@ -105,7 +87,7 @@ function EmailMessages(messages)
 {
   //send the message for each email.
   messages.forEach(message => {
-    var address = "group7seng3080@gmail.com";  //TODO: Use users actual email
+    var address = message.email;
     var subject = message.title;
     var body = message.message;
 
