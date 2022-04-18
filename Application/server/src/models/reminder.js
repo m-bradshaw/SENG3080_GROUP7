@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const Schema = mongoose.Schema;
 
 /*
 
@@ -26,6 +27,7 @@ const reminderSchema = new mongoose.Schema({
         type: String,
         maxlength: [2000, "reminder 'body' is too long!"]
     },
+    ownerID: {type: Schema.Types.ObjectId, ref: 'User'},
     nextSendDate: {
         type: Date, 
         default: Date.now

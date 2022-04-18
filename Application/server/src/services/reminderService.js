@@ -1,22 +1,23 @@
 const Reminder = require("../models/reminder")
 const nodemailer = require('nodemailer')
-const res = require("express/lib/response")
-const reminder = require("../models/reminder")
 
 
 async function get(id){
-    console.log("get")
+    const retReminder = await Reminder.findOne({_id: id});
+    return { reminder: retReminder }
 }
 
-async function getMultiple(){
-    console.log("getMultiple")
-    GetMessagesByDate(new Date())
+async function getMultiple(user){
+    const reminders = await Reminder.find({'ownerID': "625dbfa1c053a69a2198272b"});
+    GetMessagesByDate(new Date());
+    return reminders;
 }
 
-async function create(body) {
+async function create(body, user) {
     const reminder = new Reminder({
       title: body.title,
       message: body.body,
+      ownerID: user._id,
       nextSendDate: new Date(new Date() + 1 * 60 * 1000), // Change in the frontend to concat (date + time)
       recurring: body.recurring,
       daily: body.daily,
@@ -32,12 +33,17 @@ async function create(body) {
     }
 }
 
-async function update(id, reminder){
-    console.log("update")
+async function update(id, body){
+  const updated = await Reminder.findByIdAndUpdate(id, body)
+
+  return {
+    message: "Updated reminder",
+    reminder: updated
+  }
 }
 
 async function remove(id){
-    console.log("remove")
+  return await Reminder.deleteOne({_id: id })
 }
 
 //This function will be called once a minute by a cron job.
