@@ -16,35 +16,30 @@ passport.use(new GoogleStrategy({
     clientID: `${process.env.GOOGLE_CLIENT_ID}`,
     clientSecret: `${process.env.GOOGLE_SECRET}`,
     callbackURL: `${process.env.GOOGLE_REDIRECT}`,
-    scope: [ 'profile' ]
+    scope: [ 'profile',  'email']
   },
   function(accessToken, refreshToken, profile, cb) {
     // Create or get user from the database
     User.findOne({googleID: profile.id}, async (err, doc) => {
-    
       if(err) {
         console.log("Error: " + err); 
         return cb(err, null);
       }
-
-      let userDoc = null;
+      
       if(!doc) {
         // Create new user
         const user = new User({
           googleID: profile.id,
-          username: profile.name.givenName
+          username: profile.name.givenName,
+          email: profile._json.email
         })
-        await user.save((err, newUser) => {
-          if(!err) {
-            userDoc = newUser;
-          }
-          else {
-            console.log("Error: " + err);
-          }
-        });
+
+        const newUser = await user.save();
+        cb(null, newUser);
       }
-      cb(null, userDoc);
+      else {
+        cb(null, doc);
+      }
     })
-    
   }
 ));
