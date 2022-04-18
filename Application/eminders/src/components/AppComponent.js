@@ -28,7 +28,7 @@ class AppComponent extends Component {
         <div>
         <Routes>
           <Route path='/' element={<Login/>}></Route>
-          <Route path='/Login' element={<Login/>}></Route>
+          <Route path='/Login' element={<Login loginRoute="http://localhost:3001/api/v1/auth/google"/>}></Route>
           <Route path='/Main' element={<Main user={value}/>}></Route>
         </Routes>
       </div>

@@ -24,6 +24,7 @@ class Main extends Component {
     }
 
     this.state = {
+      userData: props.user,
       dataList: [],
       formData: defaultFormData,
       selectedData: {}
