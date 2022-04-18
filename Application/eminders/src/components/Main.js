@@ -29,7 +29,7 @@ class Main extends Component {
       formData: defaultFormData,
       selectedData: {}
     }
-    this.dataSource = "api/v1/reminder";
+    this.dataSource = props.dataSource;
 
     // Ensure component state is bound to changes from the following methods
     this.setExistingRemindersList = this.setExistingRemindersList.bind(this); 
