@@ -8,12 +8,12 @@ function GetData(requestInfo, dataHandlerMethod, requestInit) {
         else {
             return res.json();
         }
-    }
-    )
+    })
     .then(jsonData => {
+        if (jsonData) {
             dataHandlerMethod(jsonData); 
-        }
-    ).catch((error) => {
+        }        
+    }).catch((error) => {
         console.log("Data Fetching Error:")
         console.log(error); 
     });
