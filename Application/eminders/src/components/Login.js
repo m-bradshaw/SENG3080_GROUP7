@@ -1,7 +1,8 @@
 import React from 'react';
 import '../css/layout.css';
+import GoogleButton from 'react-google-button'
 
-import {Button, Container, Row, Col} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 
 export default function Login (props) {
 
@@ -10,13 +11,11 @@ export default function Login (props) {
     }
 
     return (
-        <Container className="alignCenter">    
-            <Row className='alignCenter'>
-                <Col xs={8}>
-                    <h1>e-minders</h1>
-                    <Button variant='primary' onClick={() => googleLogin(props)}><i className="bi bi-google"></i> Login with Google</Button>
-                </Col>
-            </Row>       
+        <Container className="verticalCenter">            
+            <div>
+                <h1 className='extraLargeTitle m-3'>e-minders</h1>
+                <GoogleButton className='mx-auto' onClick={() => googleLogin(props)}></GoogleButton>
+            </div>
         </Container>
     );    
 }
