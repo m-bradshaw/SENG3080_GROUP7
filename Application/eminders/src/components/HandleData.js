@@ -13,7 +13,10 @@ function GetData(requestInfo, dataHandlerMethod, requestInit) {
         if (jsonData) {
             dataHandlerMethod(jsonData); 
         }        
-    }).catch((error) => {
+        else {
+            console.log("Requested data is null");
+        }
+    }).catch(error => {
         console.log("Data Fetching Error:")
         console.log(error); 
     });

@@ -6,15 +6,18 @@ import {Container} from 'react-bootstrap';
 
 export default function Login (props) {
 
-    function googleLogin(route) {
-        window.open(route.loginRoute, "_self");
+    function googleLogin() {
+        console.log("Clicked")
+        console.log(props.loginRoute)
+        // window.open(route.loginRoute, "_self");
+        window.open(props.loginRoute, "_self");
     }
 
     return (
         <Container className="verticalCenter">            
             <div>
                 <h1 className='extraLargeTitle m-3'>e-minders</h1>
-                <GoogleButton className='mx-auto' onClick={() => googleLogin(props)}></GoogleButton>
+                <GoogleButton className='mx-auto' onClick={googleLogin}></GoogleButton>
             </div>
         </Container>
     );    

@@ -3,15 +3,19 @@ import GetData from './HandleData';
 
 export const myContext = createContext({});
 export default function Context(props) {
-    
+    //  dataSource="/api/v1/auth/getUser"
+    const [dataSource, setDataSource] = useState("/api/v1/auth/getUser");
     const [userObject, setUserObject] = useState();
 
     useEffect(() => {
-        var dataSource = props.dataSource;
-        var requestInit = {credentials: 'include'};
+        const requestInit = {credentials: 'include'};
         var dataHandlerMethod = setUserObject;
-        return GetData(dataSource, dataHandlerMethod, requestInit);
-    }, [props]);
+        
+        var test = GetData(dataSource, dataHandlerMethod, requestInit);
+        console.log("test"); 
+        console.log(test); 
+
+    }, [dataSource]);
     
     return (        
         <myContext.Provider value={userObject}>{props.children}</myContext.Provider>
