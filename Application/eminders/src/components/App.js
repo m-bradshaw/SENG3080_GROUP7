@@ -8,7 +8,7 @@ import {myContext} from './Context';
 
 import '../css/App.css';
 
-class AppComponent extends Component {
+class App extends Component {
   static contextType = myContext;
   componentDidMount() {
     setTimeout(() => {
@@ -37,4 +37,4 @@ class AppComponent extends Component {
   }
 }
 
-export default AppComponent;
+export default App;
