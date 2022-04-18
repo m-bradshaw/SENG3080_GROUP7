@@ -24,7 +24,8 @@ async function getMultiple(req, res, next) {
   
 async function create(req, res, next) {
   try {
-    const user = checkAuthentication(req, res)
+    //const user = checkAuthentication(req, res)
+    const user = null;
     const {recurring, daily, weekly, monthly, yearly} = req.body;
 
     // TODO: Fix this bitwise wacky operation (Only one can be true)

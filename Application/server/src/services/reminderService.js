@@ -13,11 +13,25 @@ async function getMultiple(user){
 }
 
 async function create(body, user) {
+  /*
     const reminder = new Reminder({
       title: body.title,
       message: body.body,
       ownerID: user._id,
       email: user.email,
+      nextSendDate: body.nextSendDate,
+      recurring: body.recurring,
+      daily: body.daily,
+      weekly: body.weekly,
+      monthly: body.monthly,
+      yearly: body.yearly
+    })
+    */
+    const reminder = new Reminder({
+      title: body.title,
+      message: body.body,
+      ownerID: "625df68064351b02d870903f",
+      email: "gabsantana23@gmail.com",
       nextSendDate: body.nextSendDate,
       recurring: body.recurring,
       daily: body.daily,
@@ -57,7 +71,7 @@ function checkForMessages()
   GetMessagesByDate(now, true).then((messages, err) => 
   {
     //email all the messages
-    //EmailMessages(messages);
+    EmailMessages(messages);
     
     //increment the date in all of the objects
     IncrementReocuringDate(messages)
