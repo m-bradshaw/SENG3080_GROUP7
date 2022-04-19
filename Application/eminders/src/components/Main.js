@@ -4,6 +4,7 @@ import { NavLink} from 'react-router-dom';
 import '../css/layout.css';
 import {Button, Container, Row, Col, Stack, ListGroup, Form} from 'react-bootstrap';
 import ExistingMessage from './ExistingMessage';
+import moment from 'moment';
 
 class Main extends Component {
 
@@ -216,11 +217,18 @@ class Main extends Component {
       console.log("Handling Valid Submission");
 
       if (event.target) {
+        
+        // date + time ----> UTC
+        const date = event.target[2].value; 
+        const time = event.target[3].value;
+
+        const datetime = new Date(`${date}T${time}`).toUTCString();
+
+
         var newData = {
             title: event.target[0].value, 
             message: event.target[1].value, 
-            date: event.target[2].value, 
-            //time: event.target[3].value, 
+            nextSendDate: datetime,
             recurring: event.target[4].checked, 
             daily: event.target[5].checked, 
             weekly: event.target[6].checked, 
@@ -256,9 +264,7 @@ class Main extends Component {
             console.log(error); 
         })
 
-        this.triggerAlert(newData); 
-
-
+        //this.triggerAlert(newData); 
 
 
       }  

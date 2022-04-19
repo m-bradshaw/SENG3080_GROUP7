@@ -10,7 +10,7 @@ export default function Login (props) {
         console.log("Clicked")
         console.log(props.loginRoute)
         // window.open(route.loginRoute, "_self");
-        window.open(props.loginRoute, "_self");
+        window.open("http://localhost:3001/api/v1/auth/google", "_self");
     }
 
     return (
