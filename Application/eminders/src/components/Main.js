@@ -116,11 +116,38 @@ class Main extends Component {
   deleteExistingMessage = (data) => {
     var msg = "Existing message delete clicked";
     console.log(msg);    
-    console.log(data); 
+    console.log(data);
+
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include'
+    };
+
+    fetch(`/api/v1/reminder/${data.values.id}`, requestOptions)
+        .then(res => {
+            if (res.status !== 200) {
+                console.error("Response status: " + res.status.toString()); 
+            }
+            else {
+                return res.json();
+            }
+        }).then(jsonData => {
+            if (jsonData) {
+                console.log("Context Success:");
+                console.log(jsonData);
+            }
+        }).catch((error) => {
+            console.log("Error:")
+            console.log(error); 
+    })
+
     this.setState({
-      selectedData: data.values
+      selectedData: {}
     });
-    this.triggerAlert(msg); 
+
+    // Update the whole page
+    window.location.reload(false); 
   }
 
   // Button handler for editing an existing message. 
@@ -228,7 +255,7 @@ class Main extends Component {
         console.log("Main.submitForm event.target:"); 
         console.log(event.target); 
 
-        var newData = {
+        var newData = {            
             title: event.target[0].value, 
             message: event.target[1].value, 
             nextSendDate: datetime,
@@ -243,14 +270,27 @@ class Main extends Component {
         console.log("Main.submitForm newData:"); 
         console.log(newData); 
 
+        console.log("Main.submitForm selectedData:"); 
+        console.log(this.state.selectedData); 
+        const isEmpty = Object.keys(this.state.selectedData).length === 0; 
+        
+        // If there is a selected data value, we are using patch
         const requestOptions = {
-          method: 'POST',
+          method: (isEmpty) ? 'POST' : 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newData),
           credentials: 'include'
         };
 
-        fetch("/api/v1/reminder", requestOptions)
+        console.log("Main.submitForm requestOptions"); 
+        console.log(requestOptions); 
+
+        var url = (isEmpty) ? "/api/v1/reminder" : `/api/v1/reminder/${this.state.selectedData.id}`;
+        
+        console.log("Main.submitForm url: ");
+        console.log(url);
+        
+        fetch(url, requestOptions)
         .then(res => {
             if (res.status !== 200) {
                 console.error("Response status: " + res.status.toString()); 
@@ -268,7 +308,7 @@ class Main extends Component {
             console.log(error); 
         })
 
-        //this.triggerAlert(newData); 
+        this.triggerAlert(newData); 
 
 
       }  
