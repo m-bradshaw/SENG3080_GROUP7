@@ -2,7 +2,6 @@ const passport = require('passport');
 
 async function login(req, res, next) {
     try {
-        console.log("About to hit this")
         passport.authenticate('google', { scope: ['profile'] })
     } catch (err) {
         next(err);

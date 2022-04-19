@@ -16,20 +16,6 @@ cron.schedule('*/5 * * * * *', () => {
   console.log('running a task every 5 seconds');
 });
 
-// cron.schedule('*/10 * * * * *', () => {
-//   console.log('running a task every 10 seconds');
-// });
-
-// cron.schedule('0 22 13 6 2 *', () => {
-//   console.log('Set Task Time');
-// });
-
-
-// var task = cron.schedule('*/5 * * * * *', () => {
-//   console.log('test destroy');
-//   task.stop();
-// });
-
 let nodemailer = require('nodemailer');
 
 let mailOptions = {

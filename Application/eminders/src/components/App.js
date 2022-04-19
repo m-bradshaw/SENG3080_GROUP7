@@ -21,8 +21,7 @@ class App extends Component {
   
   render() {
     let value = this.context;
-    console.log("App.render value:");
-    console.log(value);
+    console.log("App.render");
 
     return (
       // <Router hashType="noslash" basename={process.env.BASE_PATH}>
@@ -33,7 +32,6 @@ class App extends Component {
           <Route path='/Main' element={<Main user={value} dataSource="http://localhost:3001/api/v1/reminder"/>}></Route>
         </Routes>
       </div>
-      // </Router>
     );
   }
 }

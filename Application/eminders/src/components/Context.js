@@ -11,9 +11,7 @@ export default function Context(props) {
         const requestInit = {credentials: 'include'};
         var dataHandlerMethod = setUserObject;
         
-        var test = GetData(dataSource, dataHandlerMethod, requestInit);
-        console.log("test"); 
-        console.log(test); 
+        GetData(dataSource, dataHandlerMethod, requestInit);
 
     }, [dataSource]);
     

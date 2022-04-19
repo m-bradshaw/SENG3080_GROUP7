@@ -26,8 +26,7 @@ async function get(id){
 }
 
 async function getMultiple(user){
-  console.log("reminderService.getMultiple user:");
-  console.log(user);
+  console.log("reminderService.getMultiple");
 
   const reminders = await Reminder.find({'ownerID': user._id});
 
@@ -50,16 +49,9 @@ async function getMultiple(user){
       id: value._id, 
       nextSendDate: value.nextSendDate,
     }
-    console.log("reminderService.getMultiple singleReminder"); 
-    console.log(singleReminder); 
     
     temp.push(singleReminder);
   })
-
-  console.log("reminderService.getMultiple reminders:"); 
-  console.log(temp); 
-
-  console.log(temp); 
 
   return temp;
 }
@@ -102,7 +94,7 @@ async function remove(id){
 //This function will be called once a minute by a cron job.
 function checkForMessages()
 {
-  console.log("CheckForMessages");
+  console.log("reminderService.CheckForMessages");
 
   var now = new Date();
 
@@ -168,7 +160,7 @@ function SendEmail(address, subject, body)
     }
   });
   
-  console.log("About to send email...")
+  console.log("Preparing to send email...")
 
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
@@ -183,11 +175,6 @@ function IncrementReocuringDate(messages)
 {
   messages.forEach(message => 
   {
-    //// testing, move the date ahead by 1 minute
-    // message.sendDate = new Date(message.sendDate.getTime() + 60000);
-    // UpdateMessageTimeInDatabase(message);
-    // return;
-
     if(!message.recurring)
     {
       console.log(message.title + " did not need to incrment");
@@ -242,7 +229,7 @@ async function UpdateMessageTimeInDatabase(messages)
       );
   
     } catch (e) {
-      console.log('ERROR!!!!!! ' + e)
+      console.log('ERROR: ' + e)
     }
   }
 }

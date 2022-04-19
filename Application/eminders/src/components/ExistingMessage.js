@@ -16,9 +16,6 @@ function ExistingMessage(props) {
     return(
         <Row className='alignCenter mx-2'>
 
-            {/* {console.log(props)} */}
-            {/* {console.log(props.values)} */}
-
             <Col xs={2} className="alignCenter mx-1">
                 <p>{props.values.date}</p>
             </Col>

@@ -43,21 +43,13 @@ class Main extends Component {
   
   // Fetch the list on first mount
   componentDidMount() {
-    console.log("Main.componenetDidMount");
+    console.log("Main.componentDidMount");
     const requestInit = {credentials: 'include'};
     RequestJsonData(this.dataSource, this.setExistingRemindersList, requestInit);
   }
 
   componentDidUpdate() {
-    console.log("Main - Update");
-    // RequestJsonData(this.dataSource, this.setData); 
-  }
-
-  logState() {
-    console.log("dataList:");
-    console.log(this.state.dataList); 
-    console.log("formData:");
-    console.log(this.state.formData);
+    console.log("Main.componentDidUpdate");
   }
 
   logOutButton = () => {
@@ -72,8 +64,7 @@ class Main extends Component {
 
   // Sets the list of existing reminders
   setExistingRemindersList = (json) => {
-    console.log("Main.setExistingRemindersList json:");
-    console.log(json)
+    console.log("Main.setExistingRemindersList");
     if (json) {
         this.setState({dataList: json});
     }
@@ -108,9 +99,6 @@ class Main extends Component {
 
   // We should probably do a toast popup or something to confirm in here before actually removing from our list. 
   deleteExistingMessage = (data) => {
-    var msg = "Existing message delete clicked";
-    console.log(msg);    
-    console.log(data);
 
     const requestOptions = {
       method: 'DELETE',
@@ -156,7 +144,7 @@ class Main extends Component {
 
 
   radioCheckUpdated = (event) => {
-    console.log("radioCheckUpdated called!")
+    console.log("Main.radioCheckUpdated")
 
     var current = this.state.formData; 
     current.daily = event.target.id === "Daily";
@@ -168,7 +156,7 @@ class Main extends Component {
   }
   
   recurringCheckUpdated = (event) => {
-    console.log("recurringCheckUpdated called!")
+    console.log("Main.recurringCheckUpdated")
 
     var current = this.state.formData; 
     current.recurring = event.target.checked;
@@ -235,19 +223,13 @@ class Main extends Component {
         event.stopPropagation();
     }
     else {
-      console.log("Handling Valid Submission");
+      console.log("Main.SubmitForm - Valid Submission");
 
       if (event.target) {
         
-        // date + time ----> UTC
         const date = event.target[2].value; 
         const time = event.target[3].value;
-
         const datetime = new Date(`${date}T${time}`).toUTCString();
-        //const datetime = moment(`${newData.date} ${newData.time}`);
-
-        console.log("Main.submitForm event.target:"); 
-        console.log(event.target); 
 
         var newData = {            
             title: event.target[0].value, 
@@ -260,12 +242,7 @@ class Main extends Component {
             yearly: event.target[8].checked                
         }
   
-        // Call the response handler to set the data in the main component
-        console.log("Main.submitForm newData:"); 
-        console.log(newData); 
-
-        console.log("Main.submitForm selectedData:"); 
-        console.log(this.state.selectedData); 
+        // Check whether we are editing an existing value, or creating a new one
         const isEmpty = Object.keys(this.state.selectedData).length === 0; 
         
         // If there is a selected data value, we are using patch
@@ -276,14 +253,8 @@ class Main extends Component {
           credentials: 'include'
         };
 
-        console.log("Main.submitForm requestOptions"); 
-        console.log(requestOptions); 
-
         var url = (isEmpty) ? "/api/v1/reminder" : `/api/v1/reminder/${this.state.selectedData.id}`;
-        
-        console.log("Main.submitForm url: ");
-        console.log(url);
-        
+                
         fetch(url, requestOptions)
         .then(res => {
             if (res.status !== 200) {
@@ -325,7 +296,7 @@ class Main extends Component {
   resetForm = (json) => {
 
     if (json) {
-        console.log("Main.messageFormReset");
+        console.log("Main.resetForm");
     }
     this.setState({
       formData: {
