@@ -69,7 +69,7 @@ class Main extends Component {
     return (
       <Container className='mt-3'>
         <NavLink to={'../login'}>
-          <Button variant='outline-dark'><i class="bi bi-door-closed-fill"></i> Log Out</Button>
+          <Button variant='outline-dark'><i className="bi bi-door-closed-fill"></i> Log Out</Button>
         </NavLink>  
       </Container>
     )

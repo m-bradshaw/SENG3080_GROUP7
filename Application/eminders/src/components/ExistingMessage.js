@@ -37,8 +37,8 @@ function ExistingMessage(props) {
             </Col>
 
             <Col xs={true} className="mx-1">
-                <Button className="m-1" size="sm" variant='warning' onClick={handleEditClick}><i class="bi bi-pencil-fill"></i></Button>     
-                <Button className="m-1" size="sm" variant='danger' onClick={handleDeleteClick}><i class="bi bi-trash3"></i></Button>
+                <Button className="m-1" size="sm" variant='warning' onClick={handleEditClick}><i className="bi bi-pencil-fill"></i></Button>     
+                <Button className="m-1" size="sm" variant='danger' onClick={handleDeleteClick}><i className="bi bi-trash3"></i></Button>
             </Col>
         </Row> 
     );
