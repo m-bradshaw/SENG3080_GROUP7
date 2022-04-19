@@ -155,7 +155,7 @@ function SendEmail(address, subject, body)
     port: 465,
     secure: true, // use SSL
     auth: {
-      user: 'postmaster@sandboxf6b95a84410c45fd995636b8440f228c.mailgun.org',
+      user: `${process.env.MAILGUN_USER}`,
       pass: `${process.env.MAILGUN_SECRET}`,
     }
   });
