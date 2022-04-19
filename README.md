@@ -26,6 +26,7 @@ The application also interfaces with Nodemailer to send emails, and uses Node-cr
 Between other assignments, personal commitments, and COVID, we were unable to deploy remotely, though the application is functional when running the front and back-end together on a local machine.
 
 We had planned on deploying our Frontend with Netlify and our backend with Heroku, but unfortunately we were not able to connect Heroku due to timing as well as a security incident relating to GitHub.  
+
 We did deploy our Front-end to [Netlify](https://marvelous-kheer-837cbe.netlify.app/), but due to some last-minute bugs in routing and integration, this was abandoned for submission. 
 
 ![image](https://user-images.githubusercontent.com/41707698/163921506-a3dc84c4-9427-45dc-9a8a-54f9e8884161.png) https://status.heroku.com/
