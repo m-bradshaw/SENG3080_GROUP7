@@ -1,7 +1,6 @@
 import {Button, Form, Row, Col, Container, Stack, ListGroup} from 'react-bootstrap';
 import '../css/layout.css';
 import {React, useState} from 'react';
-import GetData from './HandleData';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function ExistingMessage(props) {

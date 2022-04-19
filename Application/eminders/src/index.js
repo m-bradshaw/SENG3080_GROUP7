@@ -4,7 +4,7 @@ import './css/index.css';
 import './css/App.scss';
 import './css/App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import AppComponent from './components/AppComponent';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import Context from './components/Context';
@@ -13,7 +13,7 @@ render((
   <BrowserRouter>
     <React.StrictMode>
       <Context>
-        <AppComponent />
+        <App />
       </Context>
     </React.StrictMode>
   </BrowserRouter>  

@@ -1,33 +1,22 @@
 import React, { createContext, useEffect, useState } from 'react'
+import GetData from './HandleData';
 
 export const myContext = createContext({});
 export default function Context(props) {
-    
+    //  dataSource="/api/v1/auth/getUser"
+    const [dataSource, setDataSource] = useState("/api/v1/auth/getUser");
     const [userObject, setUserObject] = useState();
-    
+
     useEffect(() => {
-        // fetch("http://localhost:3001/api/v1/auth/getUser", {credentials: 'include'})
-        fetch("/api/v1/auth/getUser", {credentials: 'include'})
-            .then(res => {
-                if (res.status !== 200) {
-                    console.error("Response status: " + res.status.toString()); 
-                }
-                else {
-                    return res.json();
-                }
-            }).then(jsonData => {
-                if (jsonData) {
-                    setUserObject(jsonData); 
-                    console.log("Context Success:");
-                    console.log(jsonData);
-                }
-            }).catch((error) => {
-                console.log("Context Error:")
-                console.log(error); 
-            })
-    }, [])
+        const requestInit = {credentials: 'include'};
+        var dataHandlerMethod = setUserObject;
+        
+        var test = GetData(dataSource, dataHandlerMethod, requestInit);
+        console.log("test"); 
+        console.log(test); 
 
-
+    }, [dataSource]);
+    
     return (        
         <myContext.Provider value={userObject}>{props.children}</myContext.Provider>
     )

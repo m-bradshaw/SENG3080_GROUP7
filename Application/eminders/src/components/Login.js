@@ -1,129 +1,24 @@
-import React, { Component } from 'react';
-import { Navigate } from 'react-router-dom';
-import GetData from './HandleData';
+import React from 'react';
 import '../css/layout.css';
-import googleLogo from '../assets/googleLogo.png';
+import GoogleButton from 'react-google-button'
 
-import {Button, Container, Form, Row, Col} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 
-class Login extends Component {
-    // Initialize the state
-    constructor(props){      
-        super(props);    
-        this.state = {
-            dataList: [], 
-            formValidated: false,
-        }
-        this.dataSource = "api/stub/login";
+export default function Login (props) {
+
+    function googleLogin() {
+        console.log("Clicked")
+        console.log(props.loginRoute)
+        // window.open(route.loginRoute, "_self");
+        window.open(props.loginRoute, "_self");
     }
 
-    // Fetch the list on first mount
-    componentDidMount() {
-        //GetData(this.dataSource, this.setData);
-    }
-
-    compoenentDidUpdate() {
-        //GetData(this.dataSource, this.setData); 
-    }
-
-    setData = (json) => {
-        if (json) {
-            console.log("setData called with...");
-            console.log(json);
-            this.setState({dataList: json.message});
-        }
-    }
-
-    googleLogin = () => {
-        window.open("http://localhost:3001/api/v1/auth/google", "_self");
-    }
-
-    handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
-        this.setState({formValidated: true});
-    };
-
-    render() {
-        const list = this.state.dataList;
-
-        var mapData = (show) => {
-            if (show) {
-                return (
-                    <div>
-                    {
-                        list.map((item, index) => {
-                            return (
-                                <div key={index}>{item}</div>
-                            );
-                        })
-                    }
-                    </div>
-                );
-            }
-            else {
-                return (
-                    <div>NO ITEMS AVAILABLE FROM SERVER</div>
-                );
-            }
-        }
-
-        const divStyle={backgroundColor: 'green'};
-        return (
+    return (
+        <Container className="verticalCenter">            
             <div>
-                <div style={divStyle}>
-                    <h1>Project Login stub</h1>                    
-                    { mapData(this.state.dataList.length >= 1) }                        
-                </div>
-
-                <br></br><br></br>
-                {(this.state.formValidated) ? <Navigate to={'../main'}></Navigate> : null}
-                <Container>
-                
-                    <Row className='alignCenter'>
-                        <Col></Col>
-                        <Col xs={8}>
-                            <h1>e-minders</h1>
-                        </Col>
-                        <Col></Col>                        
-                    </Row>
-
-                    <Row className='alignCenter'>
-                        <Col xs={8}>
-                            <div className="mb-3">
-                                <button onClick={this.googleLogin}>Login with Google</button>
-                            </div>
-                            <Form noValidate validated={this.state.formValidated} onSubmit={this.handleSubmit}>
-                                <Form.Group className="mb-3" controlId='formUsername'>
-                                    <Form.Label>Username:</Form.Label>
-                                    <Form.Control type="username" placeholder='Username' required></Form.Control>      
-                                </Form.Group>       
-                                <Form.Group className="mb-3" controlId='formPassword'>
-                                    <Form.Label>Password:</Form.Label>
-                                    <Form.Control type="password" aria-describedby='passwordHelpBlock' required></Form.Control>      
-                                </Form.Group>  
-                                <Button variant='primary' type='submit'>Login</Button>
-                            </Form>
-                        </Col>
-                    </Row>
-
-                    <Row  className='alignCenter'>
-                        <Col>
-                            <Button>Create Account</Button>
-                        </Col>
-                        <Col></Col>
-                        <Col>
-                            <Button >Forgot Password</Button>
-                        </Col>
-                    </Row>       
-
-                </Container>
+                <h1 className='extraLargeTitle m-3'>e-minders</h1>
+                <GoogleButton className='mx-auto' onClick={googleLogin}></GoogleButton>
             </div>
-        );
-    }
+        </Container>
+    );    
 }
-export default Login;
