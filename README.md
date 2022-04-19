@@ -12,14 +12,15 @@ The front end and backend interface through an API, and we implemented Google OA
 - Within the eminders folder and the server folder respectively, run "npm install" to ensure the correct packages are available. 
 - In the server folder, create a file with the name ".env" 
   - Insert the following code into the .env file and save
-> DB_SOURCE=mongodb+srv://group7:efW0QicKgKnUz36g@eminders.ac18c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-> GOOGLE_CLIENT_ID=803255276965-0h2oigkpijgdht537q5r350dqqppk236.apps.googleusercontent.com
-> GOOGLE_SECRET=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
-> GOOGLE_REDIRECT=/api/v1/auth/google/redirect
+> DB_SOURCE=mongodb+srv://group7:efW0QicKgKnUz36g@eminders.ac18c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority  
+> GOOGLE_CLIENT_ID=803255276965-0h2oigkpijgdht537q5r350dqqppk236.apps.googleusercontent.com  
+> GOOGLE_SECRET=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  
+> GOOGLE_REDIRECT=/api/v1/auth/google/redirect  
 - In the server folder, run "npm start" 
 - In the eminders folder, run "npm start" 
 - Navigate in a browser to "http://localhost:3000"
 - Sign in with a google account, and start creating "e-minders"!
 
 ## Known Issues: 
-- Between other assignments, personal commitments, and COVID, we didn't budget enough time for integration of our front and back-end components. For this reason, we were unable to deploy remotely, though the application is functional when running the front and back-end together on a local machine. 
+Between other assignments, personal commitments, and COVID, we didn't budget enough time for integration of our front and back-end components.  
+For this reason, we were unable to deploy remotely, though the application is functional when running the front and back-end together on a local machine. 
