@@ -3,9 +3,9 @@
 ### Group 7 in SENG3080 W22
 
 ## Summary: 
-For this project, we created an application for automation of sending email reminders. 
-The application was implemented using a React and Bootstrap frontend, an Express Backend, and a cloud-hosted MongoDB database. 
-The front end and backend interface through an API, and we implemented Google OAuth using Passport to manage user accounts and security. The application also interfaces with Nodemailer to send emails, and uses Node-cron to schedule the emails. 
+For this project, we created an application for automation of sending email reminders.  
+The application was implemented using a React and Bootstrap frontend, an Express Backend, and a cloud-hosted MongoDB database.   
+The front end and backend interface through an API, and we implemented Google OAuth using Passport to manage user accounts and security. The application also interfaces with Nodemailer to send emails, and uses Node-cron to schedule the emails.   
 
 ## Usage: 
 - Download the source files
