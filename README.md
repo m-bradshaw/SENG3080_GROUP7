@@ -1,11 +1,12 @@
-# SENG3080_GROUP7
+# SENG3080: e-minders
 ### Megan Bradshaw, Gabriel Gurgel, Duane Cressman
-### Group 7 in SENG3080 W22
+### Group 7, April 2022
 
 ## Summary: 
 For this project, we created an application for automation of sending email reminders.  
 The application was implemented using a React and Bootstrap frontend, an Express Backend, and a cloud-hosted MongoDB database.   
-The front end and backend interface through an API, and we implemented Google OAuth using Passport to manage user accounts and security. The application also interfaces with Nodemailer to send emails, and uses Node-cron to schedule the emails.   
+The front-end and backend interface through an API, and we implemented Google OAuth using Passport to manage user accounts and security.  
+The application also interfaces with Nodemailer to send emails, and uses Node-cron to schedule the timing of the emails.   
 
 ## Usage: 
 - Download the source files
@@ -24,6 +25,7 @@ The front end and backend interface through an API, and we implemented Google OA
 ## Known Issues: 
 Between other assignments, personal commitments, and COVID, we were unable to deploy remotely, though the application is functional when running the front and back-end together on a local machine.
 
-We had planned on deploying our Frontend with Netlify and our backend with Heroku, but unfortunately we were not able to connect Heroku due to timing as well as a security incident relating to GitHub. We did deploy our Front-end to [Netlify](https://marvelous-kheer-837cbe.netlify.app/), but due to some last-minute bugs in routing and integration, this was abandoned for submission. 
+We had planned on deploying our Frontend with Netlify and our backend with Heroku, but unfortunately we were not able to connect Heroku due to timing as well as a security incident relating to GitHub.  
+We did deploy our Front-end to [Netlify](https://marvelous-kheer-837cbe.netlify.app/), but due to some last-minute bugs in routing and integration, this was abandoned for submission. 
 
 ![image](https://user-images.githubusercontent.com/41707698/163921506-a3dc84c4-9427-45dc-9a8a-54f9e8884161.png) https://status.heroku.com/
