@@ -18,6 +18,7 @@ async function getMultiple(req, res, next) {
       const user = checkAuthentication(req, res);
       console.log("remindersController.getMultiple req.user:")
       console.log(req.user)
+      console.log(user)
 
       res.json(await reminderService.getMultiple(req.user))
     } catch (err) {

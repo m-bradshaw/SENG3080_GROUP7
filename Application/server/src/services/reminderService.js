@@ -13,10 +13,37 @@ async function getMultiple(user){
 
   const reminders = await Reminder.find({'ownerID': user._id});
 
-  console.log("reminderService.getMultiple reminders:"); 
-  console.log(reminders); 
+  var temp = []
+  reminders.forEach((value, index, array) => {
 
-  return reminders;
+    const date = `${(value.nextSendDate).getFullYear()}-${(value.nextSendDate).getMonth().toString().padStart(2, '0')}-${(value.nextSendDate).getDate().toString().padStart(2, '0')}`; 
+    const time = `${(value.nextSendDate).getHours().toString().padStart(2, '0')}:${(value.nextSendDate).getMinutes().toString().padStart(2, '0')}`; 
+
+    var singleReminder = {
+      title: value.title, 
+      message: value.message, 
+      date: date, 
+      time: time, 
+      recurring: value.recurring, 
+      daily: value.daily, 
+      weekly: value.weekly, 
+      monthly: value.monthly, 
+      yearly: value.yearly, 
+      id: value._id, 
+      nextSendDate: value.nextSendDate,
+    }
+    console.log("reminderService.getMultiple singleReminder"); 
+    console.log(singleReminder); 
+    
+    temp.push(singleReminder);
+  })
+
+  console.log("reminderService.getMultiple reminders:"); 
+  console.log(temp); 
+
+  console.log(temp); 
+
+  return temp;
 }
 
 async function create(body, user) {
