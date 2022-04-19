@@ -76,8 +76,6 @@ class Main extends Component {
     )
   }
 
-
-
   // Sets the list of existing reminders
   setExistingRemindersList = (json) => {
     console.log("Main.setExistingRemindersList json:");
@@ -85,7 +83,6 @@ class Main extends Component {
     if (json) {
         this.setState({dataList: json});
     }
-    //this.logState(); 
   }
 
   // Map the incoming server data to a list of ExistingMessage components
@@ -226,7 +223,10 @@ class Main extends Component {
         const time = event.target[3].value;
 
         const datetime = new Date(`${date}T${time}`).toUTCString();
+        //const datetime = moment(`${newData.date} ${newData.time}`);
 
+        console.log("Main.submitForm event.target:"); 
+        console.log(event.target); 
 
         var newData = {
             title: event.target[0].value, 
