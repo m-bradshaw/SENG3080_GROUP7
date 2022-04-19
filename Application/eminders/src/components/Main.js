@@ -43,8 +43,9 @@ class Main extends Component {
   
   // Fetch the list on first mount
   componentDidMount() {
-    console.log("Main - Mount");
-    RequestJsonData(this.dataSource, this.setExistingRemindersList);
+    console.log("Main.componenetDidMount");
+    const requestInit = {credentials: 'include'};
+    RequestJsonData(this.dataSource, this.setExistingRemindersList, requestInit);
   }
 
   componentDidUpdate() {
@@ -79,6 +80,8 @@ class Main extends Component {
 
   // Sets the list of existing reminders
   setExistingRemindersList = (json) => {
+    console.log("Main.setExistingRemindersList json:");
+    console.log(json)
     if (json) {
         this.setState({dataList: json});
     }
@@ -237,6 +240,7 @@ class Main extends Component {
         }
   
         // Call the response handler to set the data in the main component
+        console.log("Main.submitForm newData:"); 
         console.log(newData); 
 
         const requestOptions = {

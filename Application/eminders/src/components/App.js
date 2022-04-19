@@ -21,6 +21,7 @@ class App extends Component {
   
   render() {
     let value = this.context;
+    console.log("App.render value:");
     console.log(value);
 
     return (
@@ -29,7 +30,7 @@ class App extends Component {
         <Routes>
           <Route path='/' element={<Login/>}></Route>
           <Route path='/Login' element={<Login loginRoute="http://localhost:3001/api/v1/auth/google"/>}></Route>
-          <Route path='/Main' element={<Main user={value} dataSource="api/v1/reminder"/>}></Route>
+          <Route path='/Main' element={<Main user={value} dataSource="http://localhost:3001/api/v1/reminder"/>}></Route>
         </Routes>
       </div>
       // </Router>

@@ -8,12 +8,19 @@ async function get(id){
 }
 
 async function getMultiple(user){
-    const reminders = await Reminder.find({'ownerID': user._id});
-    return reminders;
+  console.log("reminderService.getMultiple user:");
+  console.log(user);
+
+  const reminders = await Reminder.find({'ownerID': user._id});
+
+  console.log("reminderService.getMultiple reminders:"); 
+  console.log(reminders); 
+
+  return reminders;
 }
 
 async function create(body, user) {
-  /*
+  
     const reminder = new Reminder({
       title: body.title,
       message: body.body,
@@ -26,19 +33,19 @@ async function create(body, user) {
       monthly: body.monthly,
       yearly: body.yearly
     })
-    */
-    const reminder = new Reminder({
-      title: body.title,
-      message: body.body,
-      ownerID: "625df68064351b02d870903f",
-      email: "gabsantana23@gmail.com",
-      nextSendDate: body.nextSendDate,
-      recurring: body.recurring,
-      daily: body.daily,
-      weekly: body.weekly,
-      monthly: body.monthly,
-      yearly: body.yearly
-    })
+    
+    // const reminder = new Reminder({
+    //   title: body.title,
+    //   message: body.body,
+    //   ownerID: "625df68064351b02d870903f",
+    //   email: "gabsantana23@gmail.com",
+    //   nextSendDate: body.nextSendDate,
+    //   recurring: body.recurring,
+    //   daily: body.daily,
+    //   weekly: body.weekly,
+    //   monthly: body.monthly,
+    //   yearly: body.yearly
+    // })
 
     const inserted = await reminder.save()
     return {

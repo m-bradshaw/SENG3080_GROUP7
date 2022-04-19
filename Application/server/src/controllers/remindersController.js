@@ -6,7 +6,7 @@ const unauthorizedMsg = {
 
 async function get(req, res, next) {
     try {
-      //checkAuthentication(req, res);
+      checkAuthentication(req, res);
       res.json(await reminderService.get(req.params.id));
     } catch (err) {
         next(err);
@@ -15,8 +15,11 @@ async function get(req, res, next) {
 
 async function getMultiple(req, res, next) {
     try {
-      //const user = checkAuthentication(req, res);
-      res.json(await reminderService.getMultiple(null))
+      const user = checkAuthentication(req, res);
+      console.log("remindersController.getMultiple req.user:")
+      console.log(req.user)
+
+      res.json(await reminderService.getMultiple(req.user))
     } catch (err) {
         next(err);
     }
@@ -24,8 +27,7 @@ async function getMultiple(req, res, next) {
   
 async function create(req, res, next) {
   try {
-    //const user = checkAuthentication(req, res)
-    const user = null;
+    const user = checkAuthentication(req, res);
     const {recurring, daily, weekly, monthly, yearly} = req.body;
 
     // TODO: Fix this bitwise wacky operation (Only one can be true)
@@ -42,7 +44,7 @@ async function create(req, res, next) {
 
 async function update(req, res, next) {
   try {
-    //checkAuthentication(req, res);
+    checkAuthentication(req, res);
     
     const {recurring, daily, weekly, monthly, yearly} = req.body;
 
@@ -58,7 +60,7 @@ async function update(req, res, next) {
 
 async function remove(req, res, next) {
   try {
-    //checkAuthentication(req, res);
+    checkAuthentication(req, res);
     const id = req.params.id;
     await reminderService.remove(id);
     res.json({message: "Reminder deleted: " + id});
