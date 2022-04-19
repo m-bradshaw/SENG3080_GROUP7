@@ -60,12 +60,6 @@ class Main extends Component {
     console.log(this.state.formData);
   }
 
-  triggerAlert(message) {
-    alert(JSON.stringify(message)); 
-  }
-
-
-
   logOutButton = () => {
     return (
       <Container className='mt-3'>
@@ -307,10 +301,6 @@ class Main extends Component {
             console.log("Error:")
             console.log(error); 
         })
-
-        this.triggerAlert(newData); 
-
-
       }  
     }
 
@@ -334,9 +324,8 @@ class Main extends Component {
 
   resetForm = (json) => {
 
-    this.triggerAlert("Message form Reset triggered!");
     if (json) {
-        console.log("messageFormReset called in Main");
+        console.log("Main.messageFormReset");
     }
     this.setState({
       formData: {
@@ -355,10 +344,8 @@ class Main extends Component {
     
   }
 
-
-
   render() {
-    console.log("Rendering Main:");
+    console.log("Main.render");
     return (
       <div>
 
