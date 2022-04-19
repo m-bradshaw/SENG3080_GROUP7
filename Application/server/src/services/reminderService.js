@@ -3,8 +3,26 @@ const nodemailer = require('nodemailer')
 
 
 async function get(id){
-    const retReminder = await Reminder.findOne({_id: id});
-    return { reminder: retReminder }
+    const value = await Reminder.findOne({_id: id});
+
+    const date = `${(value.nextSendDate).getFullYear()}-${(value.nextSendDate).getMonth().toString().padStart(2, '0')}-${(value.nextSendDate).getDate().toString().padStart(2, '0')}`; 
+    const time = `${(value.nextSendDate).getHours().toString().padStart(2, '0')}:${(value.nextSendDate).getMinutes().toString().padStart(2, '0')}`; 
+
+    var singleReminder = {
+      title: value.title, 
+      message: value.message, 
+      date: date, 
+      time: time, 
+      recurring: value.recurring, 
+      daily: value.daily, 
+      weekly: value.weekly, 
+      monthly: value.monthly, 
+      yearly: value.yearly, 
+      id: value._id, 
+      nextSendDate: value.nextSendDate,
+    }
+
+    return { reminder: singleReminder }
 }
 
 async function getMultiple(user){
